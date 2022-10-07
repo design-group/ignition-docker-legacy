@@ -4,6 +4,8 @@
 
 The purpose of this image is to provide a quick way to spin up docker containers that include some necessary creature comforts for version control, theme management, and easy interaction with the required file system components for an Ignition gateway.
 
+If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
+
 ## File Access
 This custom build creates a symlink in the `/workdir` directory to a few of the components in Ignition's `data` directory. This allows you to easily access the files on the host system, and simplifies the necessary `.gitignore` for a project. The following items are symlinked:
 - `/usr/local/bin/ignition/data/projects`

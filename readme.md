@@ -42,4 +42,4 @@ services:
 ```
 
 ### Requests
-If you have any requests for additional features, please feel free to open an issue on the [GitHub Repo]
+If you have any requests for additional features, please feel free to open an issue on the [GitHub Repo](https://github.com/design-group/ignition-docker) or submit a pull request.

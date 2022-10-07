@@ -18,8 +18,8 @@ RUN mkdir -p ${WORKING_DIRECTORY} && \
     chown -R ${IGNITION_UID}:${IGNITION_GID} /usr/local/bin/
 
 # Copy gitignore into the working
-COPY seed-contents/template.gitignore ${WORKING_DIRECTORY}/.gitignore
-COPY --chmod=0755 seed-contents/entrypoint-shim.sh /usr/local/bin/
+COPY seed-contents/ /usr/local/bin/seed-contents/
+COPY --chmod=0755 entrypoint-shim.sh /usr/local/bin/
 
 USER ${IGNITION_UID}:${IGNITION_GID}
 

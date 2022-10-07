@@ -1,0 +1,117 @@
+[
+    {
+        "Id": "sha256:a070a6f7263b784b3885de05c0e698cee6a3c0e9100019b2a7c1444fe65b4227",
+        "RepoTags": [
+            "kgamble/ignition:latest"
+        ],
+        "RepoDigests": [
+            "kgamble/ignition@sha256:1f7198417c4409ea8b9c2cb05dba39eb6f893d1fe8fbb0642164bd16d5d1546c"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2022-10-07T20:36:28.405808975Z",
+        "Container": "",
+        "ContainerConfig": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": null,
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "1000:1000",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8088/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin/ignition/lib/runtime/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US",
+                "LC_ALL=en_US.UTF-8",
+                "PASS_THROUGH=both",
+                "IGNITION_INSTALL_LOCATION=/usr/local/bin/ignition",
+                "WORKING_DIRECTORY=/workdir",
+                "ACCEPT_IGNITION_EULA=Y",
+                "GATEWAY_ADMIN_USERNAME=admin",
+                "GATEWAY_ADMIN_PASSWORD=bwdg8020!",
+                "IGNITION_EDITION=standard",
+                "GATEWAY_MODULES_ENABLED=alarm-notification,allen-bradley-drivers,bacnet-driver,opc-ua,perspective,reporting,tag-historian,web-developer",
+                "IGNITION_UID=1000",
+                "IGNITION_GID=1000"
+            ],
+            "Cmd": null,
+            "Healthcheck": {
+                "Test": [
+                    "CMD-SHELL",
+                    "health-check.sh -t 3"
+                ],
+                "Interval": 10000000000,
+                "Timeout": 3000000000,
+                "StartPeriod": 60000000000,
+                "Retries": 10
+            },
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/bin/ignition",
+            "Entrypoint": [
+                "entrypoint-shim.sh"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 3424051827,
+        "VirtualSize": 3424051827,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/m9ywlg3ixdijxgwlr113meru0/diff:/var/lib/docker/overlay2/dfju27im5ududcf6mux7w5gnq/diff:/var/lib/docker/overlay2/0f2a2a1d33a51dfee1cb5447e8c61efe3541205b88b811345caed51ef070bf65/diff:/var/lib/docker/overlay2/cb1301fed103fbc6c9822e9a82080d8a2969c5cb1ba5231f6942cad641668f06/diff:/var/lib/docker/overlay2/850947d30181edcdf38a518e8ac62c3abdb0e1e9820f0f0cbc67959c7e4f536c/diff:/var/lib/docker/overlay2/6209628c7343b277493dba424bb252f470c1defaa5c30a359cf214caab1e720f/diff:/var/lib/docker/overlay2/cf786041974f5a585a60af525c9467b85930929b992c54c427bc4116efd6c57f/diff:/var/lib/docker/overlay2/9a99a610f8ae9ec1452023874bd1cc940bc8d5685775dcbecfd6f775b584cb0f/diff:/var/lib/docker/overlay2/0619d6a791efd10e48370d6bf8191479838950ac44879247dffa69ccd16b5357/diff:/var/lib/docker/overlay2/670c0ca670e23aa877bd306ade0330e3f8a8f564e37ed5028cf048c12e2d13f6/diff",
+                "MergedDir": "/var/lib/docker/overlay2/s4t0ch5tnox3162w866cajsl3/merged",
+                "UpperDir": "/var/lib/docker/overlay2/s4t0ch5tnox3162w866cajsl3/diff",
+                "WorkDir": "/var/lib/docker/overlay2/s4t0ch5tnox3162w866cajsl3/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:c3f11d77a5de76ec836c52333d45ac3742c7b27d3d83feba6ec978e223715c67",
+                "sha256:2f4da94319d85c0ccb432e1f23929b9a2c9dec21a7144ec9b372bb5c2dd9677c",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:87a5f97ed88c8ab8d34047e2d6600bba05d66e6946b9a219da4e9ca95e8a1fd1",
+                "sha256:01d7daf4b269120b3990c74fd9ee489ba553ef52d462181af1b88416fefcd96c",
+                "sha256:9232bd3ee505ccb2116ecba7fa0126e40245600996238b37a14b02dc537bf675",
+                "sha256:1bf1c308ca74abcb32f466471b6ec2be17afc70cd4dc526b168d84e1b066d808",
+                "sha256:2a04b61b4a6912b5baf40cc104c546939e76fc12c08d95a89b3f9d1da2924ff0",
+                "sha256:f73ba1610b5a667166698883fca17f82870331ef23bb3706b94be306f796ae15",
+                "sha256:f025ee2c2a2d73a4982febc7050b16ee4660634bc25f84ead34c1f36e0af2b62",
+                "sha256:5575a2ce35bc04feb6e21ab8968766603740ffe941228374134d3e07e476d7dd"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2022-10-07T20:38:15.381086933Z"
+        }
+    }
+]

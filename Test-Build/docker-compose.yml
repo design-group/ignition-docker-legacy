@@ -1,0 +1,7 @@
+services:
+  gateway:
+    image: kgamble/ignition:latest
+    ports:
+      - 80:8088
+    volumes:
+      - ./data-folder:/workdir

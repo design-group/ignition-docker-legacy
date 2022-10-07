@@ -1,0 +1,24 @@
+# Ignore the builtin vscode files
+*.vscode
+
+# Ignore the theming digest files in your repo
+*.digest.json
+
+# Ignore any inbuilt theming files as well
+./modules/com.inductiveautomation.perspective/fonts
+./modules/com.inductiveautomation.perspective/icons
+
+# Ignore the default themes
+./modules/com.inductiveautomation.perspective/themes/dark.css
+./modules/com.inductiveautomation.perspective/themes/dark
+./modules/com.inductiveautomation.perspective/themes/light.css
+./modules/com.inductiveautomation.perspective/themes/light
+./modules/com.inductiveautomation.perspective/themes/dark-warm.css
+./modules/com.inductiveautomation.perspective/themes/dark-warm
+./modules/com.inductiveautomation.perspective/themes/light-warm.css
+./modules/com.inductiveautomation.perspective/themes/light-warm
+./modules/com.inductiveautomation.perspective/themes/dark-cool.css
+./modules/com.inductiveautomation.perspective/themes/dark-cool
+./modules/com.inductiveautomation.perspective/themes/light-cool.css
+./modules/com.inductiveautomation.perspective/themes/light-cool
+./modules/com.inductiveautomation.perspective/themes/README.md

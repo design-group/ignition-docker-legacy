@@ -19,6 +19,7 @@ In order for the symlinks to work, you must first create an empty folder adjacen
 ## Customizations
 This is a derived image of the `inductiveautomation/ignition` image. Please see the [Ignition Docker Hub](https://hub.docker.com/r/inductiveautomation/ignition) for more information on the base image. This image should be able to take all arguments provided by the base image, but has not been tested.
 
+### Environment Variables
 This image also preloads the following environment variables by default:
 | Environment Variable | Value |
 | --- | --- |
@@ -30,6 +31,11 @@ This image also preloads the following environment variables by default:
 | `IGNITION_UID` | `1000` |
 | `IGNITION_GID` | `1000` |
 
+### ignition.conf
+The included `ignition.conf` file is configured to scan projects every 10 seconds to optimize for version controlled projects.
+
+### logback.xml
+The included `logback.xml` file is a default file, it is just mapped into the working directory so that it can be customized if desired.
 
 ### Example docker-compose file
 ```yaml

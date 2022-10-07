@@ -35,7 +35,7 @@ This image also preloads the following environment variables by default:
 ```yaml
 services:
   gateway:
-    image: design-group/ignition:8.1.20
+    image: bwdesigngroup/ignition:8.1.20
     ports:
       - 80:8088
     # # In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file

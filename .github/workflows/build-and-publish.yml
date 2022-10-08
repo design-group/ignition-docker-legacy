@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-pre-8.1.17:
+  build_pre_8_1_17:
     runs-on: ubuntu-latest
     name: Build and push pre-8.1.17 versions
 
@@ -41,7 +41,7 @@ jobs:
         run: |
             for i in $(seq 13 16); do docker build -t bwdesigngroup/ignition-docker:8.1.$i -f legacy-versions/pre-8-1-17-Dockerfile --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
 
-  build-current:
+  build_current:
     runs-on: ubuntu-latest
     
     name: Build and push current versions

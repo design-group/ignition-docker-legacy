@@ -8,7 +8,13 @@ ENV GATEWAY_ADMIN_PASSWORD ${GATEWAY_ADMIN_PASSWORD:-password}
 ENV IGNITION_EDITION ${IGNITION_EDITION:-standard}
 ENV IGNITION_UID ${IGNITION_UID:-1000}
 ENV IGNITION_GID ${IGNITION_GID:-1000}
+ENV PROJECT_SCAN_FREQUENCY ${PROJECT_SCAN_FREQUENCY:-10}
 ENV IGNITION_INSTALL_USERHOME /home/ignition
+
+ENV SYMLINK_CONF ${SYMLINK_CONF:-true}
+ENV SYMLINK_LOGBACK ${SYMLINK_LOGBACK:-true}
+ENV SYMLINK_PROJECTS ${SYMLINK_PROJECTS:-true}
+ENV SYMLINK_THEMES ${SYMLINK_THEMES:-true}
 
 # Setup dedicated user, map file permissions, and set execution flags
 RUN mkdir ${IGNITION_INSTALL_USERHOME} && \
@@ -20,6 +26,12 @@ RUN mkdir ${IGNITION_INSTALL_USERHOME} && \
 RUN mkdir -p ${WORKING_DIRECTORY} && \
     chown -R  ${IGNITION_UID}:${IGNITION_GID} ${WORKING_DIRECTORY} && \
     chown -R ${IGNITION_UID}:${IGNITION_GID} /usr/local/bin/
+
+# Check if any of the symlinks are enabled, if so, create the working directory
+RUN if [ "$SYMLINK_CONF" = "true" ] || [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then \
+    mkdir -p ${WORKING_DIRECTORY} && \
+    chown -R  ${IGNITION_UID}:${IGNITION_GID} ${WORKING_DIRECTORY}; \
+    fi
 
 # Copy gitignore into the working
 COPY seed-contents/ /usr/local/bin/seed-contents/

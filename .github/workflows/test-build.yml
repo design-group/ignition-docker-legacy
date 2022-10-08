@@ -1,5 +1,5 @@
 # This is a workflow to build and publish the docker image to dockerhub
-name: Build-Publish
+name: Test-Builds
 
 concurrency: 
   group: ${{ github.head_ref }}
@@ -7,8 +7,16 @@ concurrency:
 
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
-  release:
-    types: [published]
+  push:
+    branches: [ "master" ]
+    paths:
+      - './Dockerfile'
+      - './legacy-versions/*Dockerfile'
+      - './.github/workflows/*'
+      - './seed-contents/*'
+      - '**.sh'
+  pull_request:
+    branches: [ "master" ]
     paths:
       - './Dockerfile'
       - './legacy-versions/*Dockerfile'
@@ -18,6 +26,8 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+
 
 jobs:
   build_pre_8_1_17:
@@ -39,7 +49,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            for i in $(seq 13 16); do docker build -t bwdesigngroup/ignition-docker:8.1.$i -f legacy-versions/pre-8-1-17-Dockerfile --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
+            for i in $(seq 13 16); do docker build -f legacy-versions/pre-8-1-17-Dockerfile --build-arg IGNITION_VERSION=8.1.$i .; done
 
   build_current:
     runs-on: ubuntu-latest
@@ -61,4 +71,4 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            for i in $(seq 17 21); do docker build -t bwdesigngroup/ignition-docker:8.1.$i --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
+            for i in $(seq 17 21); do docker build --build-arg IGNITION_VERSION=8.1.$i .; done

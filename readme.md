@@ -27,20 +27,20 @@ This is a derived image of the `inductiveautomation/ignition` image. Please see 
 
 ### Environment Variables
 This image also preloads the following environment variables by default:
-| Environment Variable | Value |
-| --- | --- |
-| `ACCEPT_IGNITION_EULA` | `Y` |
-| `GATEWAY_ADMIN_USERNAME` | `admin` |
-| `GATEWAY_ADMIN_PASSWORD` | `password` |
-| `IGNITION_EDITION` | `standard` |
-| `GATEWAY_MODULES_ENABLED` | `alarm-notification,allen-bradley-drivers,bacnet-driver,opc-ua,perspective,reporting,tag-historian,web-developer` |
-| `IGNITION_UID` | `1000` |
-| `IGNITION_GID` | `1000` |
-| `PROJECT_SCAN_FREQUENCY` | `10` |
-| `SYMLINK_CONF` | `true` |
-| `SYMLINK_LOGBACK` | `true` |
-| `SYMLINK_PROJECTS` | `true` |
-| `SYMLINK_THEMES` | `true` |
+| Environment Variable | Min-Version | Value | 
+| --- | --- | --- |
+| `ACCEPT_IGNITION_EULA` | 8.1.13 | `Y` | 
+| `GATEWAY_ADMIN_USERNAME` | 8.1.13 | `admin` |
+| `GATEWAY_ADMIN_PASSWORD` | 8.1.13 | `password` |
+| `IGNITION_EDITION` | 8.1.13 | `standard` |
+| `GATEWAY_MODULES_ENABLED` | 8.1.17 | `alarm-notification,allen-bradley-drivers,bacnet-driver,opc-ua,perspective,reporting,tag-historian,web-developer` |
+| `IGNITION_UID` | 8.1.13 | `1000` |
+| `IGNITION_GID` | 8.1.13 | `1000` |
+| `PROJECT_SCAN_FREQUENCY` | 8.1.13 | `10` |
+| `SYMLINK_CONF` | 8.1.13 | `true` |
+| `SYMLINK_LOGBACK` | 8.1.13 | `true` |
+| `SYMLINK_PROJECTS` | 8.1.13 | `true` |
+| `SYMLINK_THEMES` | 8.1.13 | `true` |
 
 ### ignition.conf
 The included `ignition.conf` file is configured to scan projects at the rate provided by the `PROJECT_SCAN_FREQUENCY` environment variable to optimize for version controlled projects. Currently to use the `PROJECT_SCAN_FREQUENCY` environment variable, you must also use the `SYMLINK_CONF` symlink.

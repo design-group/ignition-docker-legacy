@@ -16,4 +16,10 @@ ln -s ${WORKING_DIRECTORY}/logback.xml /usr/local/bin/ignition/logback.xml
 mkdir -p /workdir/projects
 mkdir -p /workdir/modules/com.inductiveautomation.perspective
 
+# Check if docker-entrpoint is not in bin directory
+if [ ! -e /usr/local/bin/docker-entrypoint.sh ]; then
+    # Run the original entrypoint script
+   mv docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+fi
+
 exec docker-entrypoint.sh "$@"

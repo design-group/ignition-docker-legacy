@@ -26,13 +26,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
         name: Build and push pre-8.1.17
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
             for i in $(seq 13 16); do docker build -t bwdesigngroup/ignition-docker:8.1.$i -f legacy-versions/pre-8-1-17-Dockerfile --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
       - 
         name: Build and push current versions
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
             for i in $(seq 17 21); do docker build -t bwdesigngroup/ignition-docker:8.1.$i --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done

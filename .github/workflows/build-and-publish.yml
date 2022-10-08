@@ -1,6 +1,10 @@
 # This is a workflow to build and publish the docker image to dockerhub
 name: Build-Publish
 
+concurrency: 
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+  
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   release:

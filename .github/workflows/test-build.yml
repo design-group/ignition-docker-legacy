@@ -10,18 +10,18 @@ on:
   push:
     branches: [ "master" ]
     paths:
-      - './Dockerfile'
-      - './legacy-versions/*Dockerfile'
-      - './.github/workflows/*'
-      - './seed-contents/*'
+      - 'Dockerfile'
+      - 'legacy-versions/*Dockerfile'
+      - '.github/workflows/*'
+      - 'seed-contents/*'
       - '**.sh'
   pull_request:
     branches: [ "master" ]
     paths:
-      - './Dockerfile'
-      - './legacy-versions/*Dockerfile'
-      - './.github/workflows/*'
-      - './seed-contents/*'
+      - 'Dockerfile'
+      - 'legacy-versions/*Dockerfile'
+      - '.github/workflows/*'
+      - 'seed-contents/*'
       - '**.sh'
 
   # Allows you to run this workflow manually from the Actions tab

@@ -32,6 +32,7 @@ RUN if [ "$SYMLINK_CONF" = "true" ] || [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SY
 COPY seed-contents/ /usr/local/bin/seed-contents/
 COPY --chmod=0755 entrypoint-shim.sh /usr/local/bin/
 
+# Set the default user and group for the image
 USER ${IGNITION_UID}:${IGNITION_GID}
 
 ENTRYPOINT [ "entrypoint-shim.sh" ]

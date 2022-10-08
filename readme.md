@@ -66,4 +66,8 @@ services:
 ```
 
 ### Requests
-If you have any requests for additional features, please feel free to open an issue on the [GitHub Repo](https://github.com/design-group/ignition-docker) or submit a pull request.
+If you have any requests for additional features, please feel free to [open an issue](https://github.com/design-group/ignition-docker/issues/new/choose) or submit a pull request.
+
+### Shoutout
+A big shoutout to [Inductive Automation](https://inductiveautomation.com/) for providing the base image and Ignition software, and [Kevin Collins](https://github.com/thirdgen88) for the original inspiration and support for this image.
+

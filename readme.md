@@ -57,7 +57,7 @@ The included `logback.xml` file is a default file, it is just mapped into the wo
 ```yaml
 services:
   gateway:
-    image: bwdesigngroup/ignition:8.1.21
+    image: bwdesigngroup/ignition-docker:8.1.21
     ports:
       - 80:8088
     # # In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file

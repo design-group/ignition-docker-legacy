@@ -72,5 +72,32 @@ if [ "$SYMLINK_THEMES" = "true" ]; then \
         mkdir -p /workdir/modules/com.inductiveautomation.perspective
 fi
 
+
+setup_additional_folder_symlinks() {
+    # ADDITIONAL_FOLDERS will be a comma delimited string of file paths to create symlinks for
+    local ADDITIONAL_FOLDERS="${1}"
+
+    # Split the ADDITIONAL_FOLDERS string into an array
+    local ADDITIONAL_FOLDERS_ARRAY=(${ADDITIONAL_FOLDERS//,/ })
+
+    # Loop through the array and create symlinks for each folder
+    for ADDITIONAL_FOLDER in "${ADDITIONAL_FOLDERS_ARRAY[@]}"; do
+        # Create the symlink
+        echo "Creating symlink for ${ADDITIONAL_FOLDER}"
+        ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} /usr/local/bin/ignition/data/${ADDITIONAL_FOLDER}
+
+        echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
+        # Create the folder in the working directory
+        mkdir -p ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER}
+    done
+
+}
+
+# If there are additional folders to symlink, run the function
+if [ -n "$ADDITIONAL_DATA_FOLDERS" ]; then \
+    setup_additional_folder_symlinks "$ADDITIONAL_DATA_FOLDERS";
+fi
+
+
 # Run the entrypoint
 entrypoint;

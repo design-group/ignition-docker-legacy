@@ -99,5 +99,10 @@ if [ -n "$ADDITIONAL_DATA_FOLDERS" ]; then \
 fi
 
 
+# If there are any modules mapped into the /modules directory, copy them to the user lib
+if [ -d "/modules" ]; then \
+    cp -r /modules/* /usr/local/bin/ignition/user-lib/modules/  
+fi
+
 # Run the entrypoint
 entrypoint;

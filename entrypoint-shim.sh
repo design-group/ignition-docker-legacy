@@ -31,11 +31,15 @@ mv ../seed-contents/.gitignore ${WORKING_DIRECTORY}/
 # Create the data folder for Ignition for any upcoming symlinks
 mkdir -p ${IGNITION_INSTALL_LOCATION}/data
 
-
-
 # Create the symlink for the conf folder if enabled
 if [ "$SYMLINK_CONF" = "true" ]; then \
     mv ../seed-contents/ignition.conf ${WORKING_DIRECTORY}/ignition.conf
+
+    # If the conf folder exists, remove it
+    if [ -e ${IGNITION_INSTALL_LOCATION}/data/conf ]; then
+        rm -rf ${IGNITION_INSTALL_LOCATION}/data/conf
+    fi
+
     ln -s ${WORKING_DIRECTORY}/ignition.conf /usr/local/bin/ignition/ignition.conf
 
     # Set the wrapper.java.additional.2=-Dignition.projects.scanFrequency = to PROJECT_SCAN_FREQUENCY in ignition.conf
@@ -45,6 +49,12 @@ fi
 # Create the symlink for the logback.xml file if enabled
 if [ "$SYMLINK_LOGBACK" = "true" ]; then \
     mv ../seed-contents/logback.xml ${WORKING_DIRECTORY}/logback.xml
+
+    # If the logback.xml file exists, remove it
+    if [ -e ${IGNITION_INSTALL_LOCATION}/data/logback.xml ]; then
+        rm -rf ${IGNITION_INSTALL_LOCATION}/data/logback.xml
+    fi
+
     ln -s ${WORKING_DIRECTORY}/logback.xml /usr/local/bin/ignition/logback.xml
 fi
 

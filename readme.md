@@ -76,6 +76,8 @@ services:
     # # In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file
     # volumes:
     #   - ./data-folder:/workdir
+    # environment:
+    #   - ADDITIONAL_DATA_FOLDERS=one-folder,other-folder
 ```
 
 ### Requests

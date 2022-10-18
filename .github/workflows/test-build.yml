@@ -7,14 +7,6 @@ concurrency:
 
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
-  push:
-    branches: [ "master" ]
-    paths:
-      - 'Dockerfile'
-      - 'legacy-versions/*Dockerfile'
-      - '.github/workflows/*'
-      - 'seed-contents/*'
-      - '**.sh'
   pull_request:
     branches: [ "master" ]
     paths:
@@ -32,7 +24,7 @@ on:
 jobs:
   build_pre_8_1_17:
     runs-on: ubuntu-latest
-    name: Build and push pre-8.1.17 versions
+    name: Test build pre-8.1.17 versions
 
     steps:
       -
@@ -54,7 +46,7 @@ jobs:
   build_current:
     runs-on: ubuntu-latest
     
-    name: Build and push current versions
+    name: Test build current versions
 
     steps:
       -

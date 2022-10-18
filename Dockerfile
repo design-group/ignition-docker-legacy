@@ -29,8 +29,8 @@ RUN if [ "$SYMLINK_CONF" = "true" ] || [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SY
     fi
     
 # Copy gitignore into the working
-COPY seed-contents/ /usr/local/bin/seed-contents/
-COPY --chmod=0755 entrypoint-shim.sh /usr/local/bin/
+COPY --chown=${IGNITION_UID}:${IGNITION_GID} seed-contents/ /usr/local/bin/seed-contents/
+COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} entrypoint-shim.sh /usr/local/bin/
 
 # Set the default user and group for the image
 USER ${IGNITION_UID}:${IGNITION_GID}

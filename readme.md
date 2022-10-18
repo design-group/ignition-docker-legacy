@@ -46,12 +46,16 @@ This image also preloads the following environment variables by default:
 | `SYMLINK_LOGBACK` | 8.1.13 | `true` |
 | `SYMLINK_PROJECTS` | 8.1.13 | `true` |
 | `SYMLINK_THEMES` | 8.1.13 | `true` |
+| `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
 
 ### ignition.conf
 The included `ignition.conf` file is configured to scan projects at the rate provided by the `PROJECT_SCAN_FREQUENCY` environment variable to optimize for version controlled projects. Currently to use the `PROJECT_SCAN_FREQUENCY` environment variable, you must also use the `SYMLINK_CONF` symlink.
 
 ### logback.xml
 The included `logback.xml` file is a default file, it is just mapped into the working directory so that it can be customized if desired.
+
+### Additional Config Folders
+Added an environment variable that allows the user to map application config files located in the `data` directory into the `/workdir`. This is customized by providing a comma separated list of folders in a string to the environment variable. For example, to map the `data/notifications` and `data/configs` folders, set the environment variable `ADDITIONAL_DATA_FOLDERS=notifications,configs` to the `docker-compose.yml` file.
 
 ### Third Party Modules
 Any additional modules outside of the native ignition ones that want to be added can be mapped into the `/modules` folder in the container. This is done by adding the following to the `volumes` section of the `docker-compose.yml` file:

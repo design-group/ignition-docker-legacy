@@ -53,6 +53,15 @@ The included `ignition.conf` file is configured to scan projects at the rate pro
 ### logback.xml
 The included `logback.xml` file is a default file, it is just mapped into the working directory so that it can be customized if desired.
 
+### Third Party Modules
+Any additional modules outside of the native ignition ones that want to be added can be mapped into the `/modules` folder in the container. This is done by adding the following to the `volumes` section of the `docker-compose.yml` file:
+```yaml
+volumes:
+  - ./my-local-modules:/modules
+```
+
+Due to the way module onboarding works, in order for it to take effect, you must restart the container after its initial creation. This can be done by running `docker-compose restart` from the directory containing the `docker-compose.yml` file.
+
 ### Example docker-compose file
 ```yaml
 services:

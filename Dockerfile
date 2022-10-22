@@ -9,9 +9,7 @@ ENV IGNITION_EDITION ${IGNITION_EDITION:-standard}
 ENV GATEWAY_MODULES_ENABLED ${GATEWAY_MODULES_ENABLED:-alarm-notification,allen-bradley-drivers,bacnet-driver,opc-ua,perspective,reporting,tag-historian,web-developer}
 ENV IGNITION_UID ${IGNITION_UID:-1000}
 ENV IGNITION_GID ${IGNITION_GID:-1000}
-ENV PROJECT_SCAN_FREQUENCY ${PROJECT_SCAN_FREQUENCY:-10}
 
-ENV SYMLINK_CONF ${SYMLINK_CONF:-true}
 ENV SYMLINK_LOGBACK ${SYMLINK_LOGBACK:-true}
 ENV SYMLINK_PROJECTS ${SYMLINK_PROJECTS:-true}
 ENV SYMLINK_THEMES ${SYMLINK_THEMES:-true}
@@ -24,7 +22,7 @@ RUN groupmod -g ${IGNITION_GID} ignition && \
 
 ENV WORKING_DIRECTORY ${WORKING_DIRECTORY:-/workdir}
 # Check if any of the symlinks are enabled, if so, create the working directory
-RUN if [ "$SYMLINK_CONF" = "true" ] || [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then \
+RUN if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then \
     mkdir -p ${WORKING_DIRECTORY} && \
     chown -R  ${IGNITION_UID}:${IGNITION_GID} ${WORKING_DIRECTORY}; \
     fi

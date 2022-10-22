@@ -19,7 +19,6 @@ This custom build creates a symlink in the `/workdir` directory to a few of the 
 | --- | --- |
 | `/usr/local/bin/ignition/data/projects` | `SYMLINK_PROJECTS` |
 | `/usr/local/bin/ignition/data/modules/com.inductiveautomation.perspective` | `SYMLINK_THEMES` |
-| `/usr/local/bin/ignition/data/ignition.conf` | `SYMLINK_CONF` |
 | `/usr/local/bin/ignition/data/logback.xml` | `SYMLINK_LOGBACK` |
 
 To disable one of the symlinks, set the environment variable to `false`. For example, to disable the symlink to the `projects` directory, set `SYMLINK_PROJECTS=false`
@@ -42,14 +41,10 @@ This image also preloads the following environment variables by default:
 | `IGNITION_UID` | 8.1.13 | `1000` |
 | `IGNITION_GID` | 8.1.13 | `1000` |
 | `PROJECT_SCAN_FREQUENCY` | 8.1.13 | `10` |
-| `SYMLINK_CONF` | 8.1.13 | `true` |
 | `SYMLINK_LOGBACK` | 8.1.13 | `true` |
 | `SYMLINK_PROJECTS` | 8.1.13 | `true` |
 | `SYMLINK_THEMES` | 8.1.13 | `true` |
 | `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
-
-### ignition.conf
-The included `ignition.conf` file is configured to scan projects at the rate provided by the `PROJECT_SCAN_FREQUENCY` environment variable to optimize for version controlled projects. Currently to use the `PROJECT_SCAN_FREQUENCY` environment variable, you must also use the `SYMLINK_CONF` symlink.
 
 ### logback.xml
 The included `logback.xml` file is a default file, it is just mapped into the working directory so that it can be customized if desired.

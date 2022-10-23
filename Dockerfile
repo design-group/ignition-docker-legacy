@@ -1,7 +1,7 @@
 ARG IGNITION_VERSION="8.1.20"
 FROM inductiveautomation/ignition:${IGNITION_VERSION:-latest}
 
-
+ENV WORKING_DIRECTORY ${WORKING_DIRECTORY:-/workdir}
 ENV ACCEPT_IGNITION_EULA "Y"
 ENV GATEWAY_ADMIN_USERNAME ${GATEWAY_ADMIN_USERNAME:-admin}
 ENV GATEWAY_ADMIN_PASSWORD ${GATEWAY_ADMIN_PASSWORD:-password}
@@ -20,7 +20,6 @@ RUN groupmod -g ${IGNITION_GID} ignition && \
     usermod -u ${IGNITION_UID} ignition && \
     chown -R ${IGNITION_UID}:${IGNITION_GID} /usr/local/bin/
 
-ENV WORKING_DIRECTORY ${WORKING_DIRECTORY:-/workdir}
 # Check if any of the symlinks are enabled, if so, create the working directory
 RUN if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then \
     mkdir -p ${WORKING_DIRECTORY} && \
@@ -31,7 +30,6 @@ RUN if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ 
 COPY --chown=${IGNITION_UID}:${IGNITION_GID} seed-contents/ /usr/local/bin/seed-contents/
 COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} entrypoint-shim.sh /usr/local/bin/
 
-# Set the default user and group for the image
 USER ${IGNITION_UID}:${IGNITION_GID}
 
 ENTRYPOINT [ "entrypoint-shim.sh" ]

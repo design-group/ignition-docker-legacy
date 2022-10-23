@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+args=("$@")
+
 # Declare a map of any potential wrapper arguments to be passed into Ignition upon startup
 declare -A wrapper_args_map=( 
     [" -Dignition.projects.scanFrequency"]=${PROJECT_SCAN_FREQUENCY:-10 }  # Disable console logging
@@ -38,10 +40,15 @@ main() {
         wrapper_args+=( "${key}=${wrapper_args_map[${key}]}")
     done
 
-    set -- "${wrapper_args[@]}"
+    # If "--" is not alraedy in the args, make sure you append it before the wrapper args
+    if [[ ! " ${args[@]} " =~ " -- " ]]; then
+        args+=( "--" )
+    fi
 
-    entrypoint "$@"
-    exit 0
+    # Append the wrapper args to the provided args
+    args+=("${wrapper_args[@]}")
+
+    entrypoint "${args[@]}"
 }
 
 ###############################################################################
@@ -124,8 +131,8 @@ entrypoint() {
         mv docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
     fi
 
-    echo "Running entrypoint with args $@"
-    exec docker-entrypoint.sh "$@"
+    echo "Running entrypoint with args ${args[@]}"
+    exec docker-entrypoint.sh "${args[@]}"
 }
 
-main "$@"
+main "$args"

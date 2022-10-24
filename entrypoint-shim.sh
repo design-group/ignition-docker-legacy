@@ -61,8 +61,8 @@ seed_preloaded_contents() {
     if [ "$SYMLINK_LOGBACK" = "true" ]; then
         # Move the logback.xml file into the working directory so the host can see it
         mv ../seed-contents/logback.xml ${WORKING_DIRECTORY}/logback.xml
-        # Add the -Dlogback.configurationFile=/workdir/logback.xml property to the wrapper args map
-        wrapper_args_map+=( [" -Dlogback.configurationFile"]="/workdir/logback.xml" )
+        # Add the -Dlogback.configurationFile=${WORKING_DIRECTORY}/logback.xml property to the wrapper args map
+        wrapper_args_map+=( [" -Dlogback.configurationFile"]="${WORKING_DIRECTORY}/logback.xml" )
     fi
 }
 
@@ -71,18 +71,24 @@ seed_preloaded_contents() {
 # Create the projects directory and symlink it to the host's projects directory
 ###############################################################################
 symlink_projects() {
-    ln -s ${WORKING_DIRECTORY}/projects /usr/local/bin/ignition/data/projects
-    mkdir -p /workdir/projects
+    # If the project directory symlink isnt already there, create it
+    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/projects ]; then
+        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data/projects
+        mkdir -p ${WORKING_DIRECTORY}/projects
+    fi
 }
 
 ###############################################################################
 # Create the themes directory and symlink it to the host's themes directory
 ###############################################################################
 symlink_themes() {
-    mkdir -p ${WORKING_DIRECTORY}/modules
-    mkdir -p ${IGNITION_INSTALL_LOCATION}/data/modules
-    ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective /usr/local/bin/ignition/data/modules/com.inductiveautomation.perspective
-    mkdir -p /workdir/modules/com.inductiveautomation.perspective
+    # If the themes directory symlink isnt already there, create it
+    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective ]; then
+        mkdir -p ${WORKING_DIRECTORY}/modules
+        mkdir -p ${IGNITION_INSTALL_LOCATION}/data/modules
+        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective
+        mkdir -p ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective
+    fi
 }
 
 
@@ -93,6 +99,7 @@ symlink_themes() {
 #   $1 - Comma separated list of folders to symlink
 ###############################################################################
 setup_additional_folder_symlinks() {
+    
     # ADDITIONAL_FOLDERS will be a comma delimited string of file paths to create symlinks for
     local ADDITIONAL_FOLDERS="${1}"
 
@@ -101,13 +108,14 @@ setup_additional_folder_symlinks() {
 
     # Loop through the array and create symlinks for each folder
     for ADDITIONAL_FOLDER in "${ADDITIONAL_FOLDERS_ARRAY[@]}"; do
-        # Create the symlink
-        echo "Creating symlink for ${ADDITIONAL_FOLDER}"
-        ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} /usr/local/bin/ignition/data/${ADDITIONAL_FOLDER}
+        # If the symlink and folder dont exist, create them
+        if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/${ADDITIONAL_FOLDER} ]; then
+            echo "Creating symlink for ${ADDITIONAL_FOLDER}"
+            ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} ${IGNITION_INSTALL_LOCATION}/data/${ADDITIONAL_FOLDER}
 
-        echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
-        # Create the folder in the working directory
-        mkdir -p ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER}
+             echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
+            mkdir -p ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER}
+        fi
     done
 }
 

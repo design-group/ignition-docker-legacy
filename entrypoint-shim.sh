@@ -55,9 +55,11 @@ main() {
 # Seed any pre-customized gateway contents into the working directory
 ###############################################################################
 seed_preloaded_contents() {
-    # Move the gitignore file into the working directory so the host can see it
-    mv ../seed-contents/.gitignore ${WORKING_DIRECTORY}/
-
+    if [ "$SYMLINK_GITIGNORE" = "true" ]; then
+        # Move the gitignore file into the working directory so the host can see it
+        mv ../seed-contents/.gitignore ${WORKING_DIRECTORY}/
+    fi
+    
     if [ "$SYMLINK_LOGBACK" = "true" ]; then
         # Move the logback.xml file into the working directory so the host can see it
         mv ../seed-contents/logback.xml ${WORKING_DIRECTORY}/logback.xml

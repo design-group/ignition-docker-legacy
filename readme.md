@@ -44,6 +44,7 @@ This image also preloads the following environment variables by default:
 | `SYMLINK_LOGBACK` | 8.1.13 | `true` |
 | `SYMLINK_PROJECTS` | 8.1.13 | `true` |
 | `SYMLINK_THEMES` | 8.1.13 | `true` |
+| `SYMLINK_GITIGNORE` | 8.1.13 | `true` |
 | `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
 
 ### logback.xml

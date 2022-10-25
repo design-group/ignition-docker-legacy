@@ -75,7 +75,7 @@ seed_preloaded_contents() {
 symlink_projects() {
     # If the project directory symlink isnt already there, create it
     if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/projects ]; then
-        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data/projects
+        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data
         mkdir -p ${WORKING_DIRECTORY}/projects
     fi
 }
@@ -88,7 +88,7 @@ symlink_themes() {
     if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective ]; then
         mkdir -p ${WORKING_DIRECTORY}/modules
         mkdir -p ${IGNITION_INSTALL_LOCATION}/data/modules
-        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective
+        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules
         mkdir -p ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective
     fi
 }
@@ -113,7 +113,7 @@ setup_additional_folder_symlinks() {
         # If the symlink and folder dont exist, create them
         if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/${ADDITIONAL_FOLDER} ]; then
             echo "Creating symlink for ${ADDITIONAL_FOLDER}"
-            ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} ${IGNITION_INSTALL_LOCATION}/data/${ADDITIONAL_FOLDER}
+            ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} ${IGNITION_INSTALL_LOCATION}/data/
 
              echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
             mkdir -p ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER}
@@ -124,7 +124,7 @@ setup_additional_folder_symlinks() {
 ###############################################################################
 # Copy any modules from the /modules directory into the user lib
 ###############################################################################
-copy_modules() {
+copy_modules_to_user_lib() {
     # Copy the modules from the modules folder into the ignition modules folder
     cp -r /modules/* ${IGNITION_INSTALL_LOCATION}/user-lib/modules/  
 }

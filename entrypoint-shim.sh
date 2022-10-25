@@ -75,7 +75,7 @@ seed_preloaded_contents() {
 symlink_projects() {
     # If the project directory symlink isnt already there, create it
     if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/projects ]; then
-        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data
+        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data/
         mkdir -p ${WORKING_DIRECTORY}/projects
     fi
 }
@@ -88,7 +88,7 @@ symlink_themes() {
     if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective ]; then
         mkdir -p ${WORKING_DIRECTORY}/modules
         mkdir -p ${IGNITION_INSTALL_LOCATION}/data/modules
-        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules
+        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules/
         mkdir -p ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective
     fi
 }

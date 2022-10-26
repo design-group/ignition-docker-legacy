@@ -42,7 +42,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          docker build -f secondary-versions/mes/Dockerfile -t bwdesigngroup/ignition-docker-mes:8.1.21 --build-arg IGNITION_VERSION=8.1.20 secondary-versions/mes; docker push bwdesigngroup/ignition-docker-mes:8.1.20
+          docker build -f secondary-versions/mes/Dockerfile -t bwdesigngroup/ignition-docker-mes:8.1.20 --build-arg IGNITION_VERSION=8.1.20 secondary-versions/mes; docker push bwdesigngroup/ignition-docker-mes:8.1.20
 
   build_pre_8_1_17:
     runs-on: ubuntu-latest

@@ -53,7 +53,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          docker build -f secondary-versions/pre-8-1-17/Dockerfile --build-arg IGNITION_VERSION=8.1.13 secondary-versions/pre-8-1-17
+          docker build -f secondary-versions/pre-8-1-17/Dockerfile --build-arg IGNITION_VERSION=8.1.13 .
 
   build_current:
     runs-on: ubuntu-latest

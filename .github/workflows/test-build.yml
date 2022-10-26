@@ -1,17 +1,16 @@
 # This is a workflow to build and publish the docker image to dockerhub
 name: Test-Builds
 
-concurrency: 
+concurrency:
   group: ${{ github.head_ref }}
   cancel-in-progress: true
 
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
-
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -22,59 +21,50 @@ jobs:
     name: Test build iiot on latest version
 
     steps:
-      -
-        name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Test build iiot image
+      - name: Test build iiot image
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            docker build -f secondary-versions/iiot/Dockerfile --build-arg IGNITION_VERSION=8.1.21 .
-  
+          docker build -f secondary-versions/iiot/Dockerfile --build-arg IGNITION_VERSION=8.1.21 secondary-versions/iiot
+
   build_mes:
     runs-on: ubuntu-latest
     name: Test build mes on latest supported version
 
     steps:
-      -
-        name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Test build mes image
+      - name: Test build mes image
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            docker build -f secondary-versions/mes/Dockerfile --build-arg IGNITION_VERSION=8.1.20 .
-
+          docker build -f secondary-versions/mes/Dockerfile --build-arg IGNITION_VERSION=8.1.20 secondary-versions/mes
 
   build_pre_8_1_17:
     runs-on: ubuntu-latest
     name: Test build pre-8.1.17 versions
 
     steps:
-      -
-        name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Test Build 8.1.13
+      - name: Test Build 8.1.13
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            docker build -f secondary-versions/pre-8-1-17/Dockerfile --build-arg IGNITION_VERSION=8.1.13 .
+          docker build -f secondary-versions/pre-8-1-17/Dockerfile --build-arg IGNITION_VERSION=8.1.13 .
 
   build_current:
     runs-on: ubuntu-latest
-    
+
     name: Test build current versions
 
     steps:
-      -
-        name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Test build current versions
+      - name: Test build current versions
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            docker build --build-arg IGNITION_VERSION=8.1.21 .
+          docker build --build-arg IGNITION_VERSION=8.1.21 .

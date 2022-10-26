@@ -126,7 +126,7 @@ setup_additional_folder_symlinks() {
 ###############################################################################
 copy_modules_to_user_lib() {
     # Copy the modules from the modules folder into the ignition modules folder
-    cp -r /modules/* ${IGNITION_INSTALL_LOCATION}/user-lib/modules/  
+	cp -r /modules/* ${IGNITION_INSTALL_LOCATION}/user-lib/modules/
 }
 
 ###############################################################################

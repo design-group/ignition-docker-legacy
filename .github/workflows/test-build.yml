@@ -7,21 +7,47 @@ concurrency:
 
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
-    paths:
-      - 'Dockerfile'
-      - 'legacy-versions/*Dockerfile'
-      - '.github/workflows/*'
-      - 'seed-contents/*'
-      - '**.sh'
+    branches: [ master ]
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-
-
 jobs:
+  build_iiot:
+    runs-on: ubuntu-latest
+    name: Test build iiot on latest version
+
+    steps:
+      -
+        name: Checkout 
+        uses: actions/checkout@v2
+      -
+        name: Test build iiot image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+            docker build -f secondary-versions/iiot/Dockerfile --build-arg IGNITION_VERSION=8.1.21 .
+  
+  build_mes:
+    runs-on: ubuntu-latest
+    name: Test build mes on latest supported version
+
+    steps:
+      -
+        name: Checkout 
+        uses: actions/checkout@v2
+      -
+        name: Test build mes image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+            docker build -f secondary-versions/mes/Dockerfile --build-arg IGNITION_VERSION=8.1.20 .
+
+
   build_pre_8_1_17:
     runs-on: ubuntu-latest
     name: Test build pre-8.1.17 versions
@@ -31,17 +57,11 @@ jobs:
         name: Checkout 
         uses: actions/checkout@v2
       -
-        name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      -
-        name: Build and push pre-8.1.17
+        name: Test Build 8.1.13
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            for i in $(seq 13 16); do docker build -f legacy-versions/pre-8-1-17-Dockerfile --build-arg IGNITION_VERSION=8.1.$i .; done
+            docker build -f secondary-versions/pre-8-1-17/Dockerfile --build-arg IGNITION_VERSION=8.1.13 .
 
   build_current:
     runs-on: ubuntu-latest
@@ -53,14 +73,8 @@ jobs:
         name: Checkout 
         uses: actions/checkout@v2
       -
-        name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      -
-        name: Build and push current versions
+        name: Test build current versions
         env:
           DOCKER_BUILDKIT: 1
         run: |
-            for i in $(seq 17 21); do docker build --build-arg IGNITION_VERSION=8.1.$i .; done
+            docker build --build-arg IGNITION_VERSION=8.1.21 .

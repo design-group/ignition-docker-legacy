@@ -53,6 +53,30 @@ The included `logback.xml` file is a default file, it is just mapped into the wo
 ### Additional Config Folders
 Added an environment variable that allows the user to map application config files located in the `data` directory into the `/workdir`. This is customized by providing a comma separated list of folders in a string to the environment variable. For example, to map the `data/notifications` and `data/configs` folders, set the environment variable `ADDITIONAL_DATA_FOLDERS=notifications,configs` to the `docker-compose.yml` file.
 
+### Secondary Images
+This image also includes a few other images that are useful for development that involves third party igniiton modules being pre-installed.
+
+#### ignition-docker-iiot
+This image is a derivative of the `inductiveautomation/ignition` image, and includes the following modules pre-installed:
+- `MQTT Transmission`
+- `MQTT Engine`
+- `MQTT Distributor`
+
+It takes the `IIOT_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable all three modules, set the environment variable `IIOT_MODULES_ENABLED=mqtt-transmission,mqtt-engine,mqtt-distributor` to the `docker-compose.yml` file. This image only supports version 8.1.21, if a different version is needed, please open an issue.
+
+#### ignition-docker-mes
+This image is a derivative of the `inductiveautomation/ignition` image, and includes the following modules pre-installed:
+- `WebService`
+- `Production`
+- `Settings and Changeover`
+- `Batch`
+- `SPC`
+- `Document Management`
+- `OEE Downtime`
+- `Track and Trace`
+
+It takes the `MES_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable the Settings and Changeover and Batch Procedure modules, set the environment variable `MES_MODULES_ENABLED=production,batch` to the `docker-compose.yml` file. This image only supports version 8.1.21, if a different version is needed, please open an issue.
+
 ### Third Party Modules
 Any additional modules outside of the native ignition ones that want to be added can be mapped into the `/modules` folder in the container. This is done by adding the following to the `volumes` section of the `docker-compose.yml` file:
 ```yaml

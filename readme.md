@@ -18,7 +18,7 @@ This custom build creates a symlink in the `/workdir` directory to a few of the 
 | Symlink Path | Environment Variable |
 | --- | --- |
 | `/usr/local/bin/ignition/data/projects` | `SYMLINK_PROJECTS` |
-| `/usr/local/bin/ignition/data/modules/com.inductiveautomation.perspective` | `SYMLINK_THEMES` |
+| `/usr/local/bin/ignition/data/modules` | `SYMLINK_THEMES` |
 | `/usr/local/bin/ignition/data/logback.xml` | `SYMLINK_LOGBACK` |
 
 To disable one of the symlinks, set the environment variable to `false`. For example, to disable the symlink to the `projects` directory, set `SYMLINK_PROJECTS=false`

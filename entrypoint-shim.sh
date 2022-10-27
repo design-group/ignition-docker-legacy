@@ -84,12 +84,11 @@ symlink_projects() {
 # Create the themes directory and symlink it to the host's themes directory
 ###############################################################################
 symlink_themes() {
-    # If the themes directory symlink isnt already there, create it
-    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules/com.inductiveautomation.perspective ]; then
+    # If the modules directory symlink isnt already there, create it
+    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules ]; then
+        mkdir -p ${IGNITION_INSTALL_LOCATION}/data
+        ln -s ${WORKING_DIRECTORY}/modules ${IGNITION_INSTALL_LOCATION}/data/
         mkdir -p ${WORKING_DIRECTORY}/modules
-        mkdir -p ${IGNITION_INSTALL_LOCATION}/data/modules
-        ln -s ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective ${IGNITION_INSTALL_LOCATION}/data/modules/
-        mkdir -p ${WORKING_DIRECTORY}/modules/com.inductiveautomation.perspective
     fi
 }
 

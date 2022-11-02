@@ -79,4 +79,4 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          for i in $(seq 17 21); do docker build -t bwdesigngroup/ignition-docker:8.1.$i --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
+          for i in $(seq 17 22); do docker build -t bwdesigngroup/ignition-docker:8.1.$i --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done

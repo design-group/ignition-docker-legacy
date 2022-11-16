@@ -34,6 +34,11 @@ main() {
         copy_modules_to_user_lib
     fi
 
+	# If developer mode is enabled, add the developer mode wrapper arguments
+	if [ "$DEVELOPER_MODE" = "Y" ]; then
+		add_developer_mode_args
+	fi
+
      # Convert wrapper args associative array to index array prior to launch
     local wrapper_args=( )
     for key in "${!wrapper_args_map[@]}"; do
@@ -126,6 +131,14 @@ setup_additional_folder_symlinks() {
 copy_modules_to_user_lib() {
     # Copy the modules from the modules folder into the ignition modules folder
 	cp -r /modules/* ${IGNITION_INSTALL_LOCATION}/user-lib/modules/
+}
+
+###############################################################################
+# Enable the developer mode java args so that its easier to upload custom modules
+###############################################################################
+add_developer_mode_args() {
+	wrapper_args_map+=( [" -Dia.developer.moduleupload"]="true" )
+	wrapper_args_map+=( [" -Dignition.allowunsignedmodules"]="true" )
 }
 
 ###############################################################################

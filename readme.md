@@ -44,6 +44,7 @@ This image also preloads the following environment variables by default:
 | `SYMLINK_THEMES` | 8.1.13 | `true` |
 | `SYMLINK_GITIGNORE` | 8.1.13 | `true` |
 | `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
+| `DEVELOPER_MODE` | 8.1.13 | `N` |
 
 ### logback.xml
 The included `logback.xml` file is a default file, it is just mapped into the working directory so that it can be customized if desired.

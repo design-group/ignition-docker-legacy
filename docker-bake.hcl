@@ -26,6 +26,9 @@ target "current" {
 	context = "."
 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.${PATCH_VERSION}"]
 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
 	platforms = [
 		"linux/amd64", 
 		"linux/arm64", 
@@ -41,6 +44,9 @@ target "pre-8-1-17" {
 	context = "secondary-versions/pre-8-1-17"
 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${PATCH_VERSION}"]
 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
 	platforms = [
 		"linux/amd64", 
 		"linux/arm64", 
@@ -55,6 +61,9 @@ target "mes" {
 	context = "secondary-versions/mes"
 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:cache-${BASE_VERSION}.${PATCH_VERSION}"]
 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
 	platforms = [
 		"linux/amd64", 
 		"linux/arm64", 
@@ -69,6 +78,9 @@ target "iiot" {
 	context = "secondary-versions/iiot"
 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:cache-${BASE_VERSION}.${PATCH_VERSION}"]
 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
 	platforms = [
 		"linux/amd64", 
 		"linux/arm64", 

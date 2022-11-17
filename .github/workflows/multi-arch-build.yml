@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         patch-version: [17,18,19,20,21,22]
-    uses: design-group/ignition-docker/.github/workflows/setup-docker-env.yml@master
+    uses: .github/workflows/setup-docker-env.yml@HEAD
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       files: ./docker-bake.hcl
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         patch-version: [20]
-    uses: design-group/ignition-docker/.github/workflows/setup-docker-env.yml@master
+    uses: .github/workflows/setup-docker-env.yml@HEAD
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       files: ./docker-bake.hcl
@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         patch-version: [21]
-    uses: design-group/ignition-docker/.github/workflows/setup-docker-env.yml@master
+    uses:  .github/workflows/setup-docker-env.yml@HEAD
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       files: ./docker-bake.hcl

@@ -1,4 +1,4 @@
-name: "Multibuild"
+name: "Build Current"
 
 on:
   workflow_dispatch:

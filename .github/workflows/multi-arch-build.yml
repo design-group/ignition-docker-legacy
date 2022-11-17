@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  build:
     name: Setup
     runs-on: ubuntu-latest
     steps:
@@ -33,5 +33,5 @@ jobs:
         uses: docker/bake-action@v2.3.0
         with:
           files: ./docker-bake.hcl
-          group: build
+          targets: build
           push: true

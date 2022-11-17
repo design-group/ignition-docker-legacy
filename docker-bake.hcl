@@ -2,8 +2,8 @@
 
 group "build" {
 	targets = [
-		"8-1-16",
-		"8-1-17"
+		"8-1-17",
+		"8-1-18"
 	]
 }
 
@@ -35,19 +35,6 @@ target "8-1-base" {
 	]
 }
 
-// This target inherits the 8-1-base and sets the patch to 16
-target "8-1-16" {
-	inherits = ["8-1-base"]
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.16"]
-	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.16"]
-	args = {
-		IGNITION_VERSION = "8.1.16"
-	}
-	tags = [
-		"${BASE_IMAGE_NAME}:8.1.16"
-	]
-}
-
 // This target inherits the 8-1-base and sets the patch to 17
 target "8-1-17" {
 	inherits = ["8-1-base"]
@@ -58,6 +45,19 @@ target "8-1-17" {
 	}
 	tags = [
 		"${BASE_IMAGE_NAME}:8.1.17"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-18" {
+	inherits = ["8-1-base"]
+	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.18"]
+	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.18"]
+	args = {
+		IGNITION_VERSION = "8.1.18"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.18"
 	]
 }
 
@@ -84,10 +84,10 @@ target "8-1-17" {
 // }
 
 
-// target "pre-8-1-17" {
-// 	context = "secondary-versions/pre-8-1-17"
-// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${PATCH_VERSION}"]
-// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+// target "pre-8-1-18" {
+// 	context = "secondary-versions/pre-8-1-18"
+// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-18:cache-${BASE_VERSION}.${PATCH_VERSION}"]
+// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-18:cache-${BASE_VERSION}.${PATCH_VERSION}"]
 // 	args = {
 // 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
 // 	}
@@ -97,7 +97,7 @@ target "8-1-17" {
 // 		"linux/arm",
 // 	]
 // 		tags = [
-// 		"${BASE_IMAGE_NAME}-pre-8.1.17:${BASE_VERSION}.${PATCH_VERSION}"
+// 		"${BASE_IMAGE_NAME}-pre-8.1.18:${BASE_VERSION}.${PATCH_VERSION}"
 // 	]
 // }
 

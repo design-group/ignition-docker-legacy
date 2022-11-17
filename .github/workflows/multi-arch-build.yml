@@ -12,6 +12,8 @@ jobs:
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       TARGETS: current
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
   build-mes:
     strategy:
@@ -21,6 +23,9 @@ jobs:
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       TARGETS: mes
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+  
   
   build-iiot:
     strategy:
@@ -30,3 +35,5 @@ jobs:
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
       TARGETS: iiot
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}

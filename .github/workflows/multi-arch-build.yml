@@ -11,9 +11,7 @@ jobs:
     uses: ./.github/workflows/setup-docker-env.yml
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
-      files: ./docker-bake.hcl
-      targets: current
-      push: true
+      TARGETS: current
 
   build-mes:
     strategy:
@@ -22,9 +20,7 @@ jobs:
     uses: ./.github/workflows/setup-docker-env.yml
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
-      files: ./docker-bake.hcl
-      targets: mes
-      push: true
+      TARGETS: mes
   
   build-iiot:
     strategy:
@@ -33,6 +29,4 @@ jobs:
     uses:  ./.github/workflows/setup-docker-env.yml
     with:
       PATCH_VERSION: ${{ matrix.patch-version }}
-      files: ./docker-bake.hcl
-      targets: iiot
-      push: true
+      TARGETS: iiot

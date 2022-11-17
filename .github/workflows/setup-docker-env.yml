@@ -7,6 +7,10 @@ on:
         description: "Patch version to build"
         required: true
         type: number
+      TARGETS:
+        description: "HCL Target to build"
+        required: true
+        type: string
 
 jobs:
   setup:
@@ -33,4 +37,7 @@ jobs:
         uses: docker/bake-action@v2.3.0
         env:
           PATCH_VERSION: ${{ inputs.PATCH_VERSION }}
-     
+        with:
+          files: ./docker-bake.hcl
+          targets: ${{ inputs.TARGETS }}
+          push: true

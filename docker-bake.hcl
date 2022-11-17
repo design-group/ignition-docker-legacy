@@ -21,7 +21,7 @@ variable "PATCH_VERSION" {
 
 
 target "8-1-base" {
-	context = .
+	context = "."
 	args = {
 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
 	}

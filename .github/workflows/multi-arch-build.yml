@@ -32,6 +32,6 @@ jobs:
         with:
           files: ./docker-bake.hcl
           targets: current
-          set: |
-            current.PATCH_VERSION=${{ matrix.patch-version }}
+        env:
+          PATCH_VERSION: ${{ matrix.patch-version }}
           push: true

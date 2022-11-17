@@ -11,3 +11,6 @@ for i in $(seq 13 16); do docker build -t bwdesigngroup/ignition-docker:8.1.$i -
 
 # Build out all current versions and push them to dockerhub
 for i in $(seq 17 22); do docker build -t bwdesigngroup/ignition-docker:8.1.$i --build-arg IGNITION_VERSION=8.1.$i .; docker push bwdesigngroup/ignition-docker:8.1.$i; done
+
+# Multi-Arch build
+docker buildx build --push --platform linux/amd64,linux/arm64 --tag bwdesigngroup/ignition-docker:8.1.22  --build-arg IGNITION_VERSION=8.1.22 .

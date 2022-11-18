@@ -32,6 +32,18 @@ group "ignition-base" {
 	]
 }
 
+group "ignition-iiot" {
+	targets = [
+		"iiot-8-1-21"
+	]
+}
+
+group "ignition-mes" {
+	targets = [
+		"mes-8-1-20"
+	]
+}
+
 variable "BASE_IMAGE_NAME" {
     default = "bwdesigngroup/ignition-docker"
 }

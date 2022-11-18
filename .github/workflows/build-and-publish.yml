@@ -2,11 +2,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: "Build and publish"
+  build-base-images:
+    name: "Build Base Images"
     uses: ./.github/workflows/multi-arch-build.yml
     with:
       PUSH: true
+      TARGET: "ignition-base"
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+  
+  build-iiot-images:
+    name: "Build IIOT Images"
+    uses: ./.github/workflows/multi-arch-build.yml
+    with:
+      PUSH: true
+      TARGET: "ignition-iiot"
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+  
+  build-mes-images:
+    name: "Build MES Images"
+    uses: ./.github/workflows/multi-arch-build.yml
+    with:
+      PUSH: true
+      TARGET: "ignition-mes"
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}

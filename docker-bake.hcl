@@ -17,6 +17,21 @@ group "build" {
 	]
 }
 
+group "ignition-base" {
+	targets = [
+		"8-1-13",
+		"8-1-14",
+		"8-1-15",
+		"8-1-16",
+		"8-1-17",
+		"8-1-18",
+		"8-1-19",
+		"8-1-20",
+		"8-1-21",
+		"8-1-22"
+	]
+}
+
 variable "BASE_IMAGE_NAME" {
     default = "bwdesigngroup/ignition-docker"
 }
@@ -34,7 +49,8 @@ variable "PATCH_VERSION" {
 // ###########################################################################################
 
 target "pre-8-1-17-base" {
-	context = "secondary-versions/pre-8-1-17/"
+	context = "."
+	dockerfile = "secondary-versions/pre-8-1-17/Dockerfile"
 	args = {
 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
 	}
@@ -184,7 +200,8 @@ target "8-1-22" {
 // ###########################################################################################
 
 target "iiot-base" {
-	context = "secondary-versions/iiot/"
+	context = "."
+	dockerfile = "secondary-versions/iiot/Dockerfile"
 	args = {
 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
 	}
@@ -213,7 +230,8 @@ target "iiot-8-1-21" {
 // ###########################################################################################
 
 target "mes-base" {
-	context = "secondary-versions/mes/"
+	context = "."
+	dockerfile = "secondary-versions/mes/Dockerfile"
 	args = {
 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
 	}

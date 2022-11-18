@@ -6,9 +6,7 @@ on:
 jobs:
   build:
     name: Setup
-    runs-on:
-      group: Default Large Runners
-      labels: ubuntu-latest-4-cores
+    runs-on: ubuntu-latest-8-cores
     steps:
       - 
         name: Checkout

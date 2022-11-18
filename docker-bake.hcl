@@ -29,6 +29,69 @@ variable "PATCH_VERSION" {
     default = 22
 }
 
+// ###########################################################################################
+//  PRE-8-1-17 Imaages
+// ###########################################################################################
+
+target "pre-8-1-17-base" {
+	context = "secondary-versions/pre-8-1-17/"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+// This target inherits the pre-8-1-17-base and sets the patch to 13
+target "8-1-13" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.13"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.13"
+	]
+}
+
+
+// This target inherits the pre-8-1-17-base and sets the patch to 14
+target "8-1-14" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.14"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.14"
+	]
+}
+
+// This target inherits the pre-8-1-17-base and sets the patch to 15
+target "8-1-15" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.15"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.15"
+	]
+}
+
+// This target inherits the pre-8-1-17-base and sets the patch to 16
+target "8-1-16" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.16"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.16"
+	]
+}
 
 // ###########################################################################################
 //  Current Imaages
@@ -117,70 +180,6 @@ target "8-1-22" {
 }
 
 // ###########################################################################################
-//  PRE-8-1-17 Imaages
-// ###########################################################################################
-
-target "pre-8-1-17-base" {
-	context = "secondary-versions/pre-8-1-17/"
-	args = {
-		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
-	}
-	platforms = [
-		"linux/amd64", 
-		"linux/arm64", 
-		"linux/arm",
-	]
-	tags = [
-		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${PATCH_VERSION}"
-	]
-}
-
-// This target inherits the pre-8-1-17-base and sets the patch to 13
-target "8-1-13" {
-	inherits = ["pre-8-1-17-base"]
-	args = {
-		IGNITION_VERSION = "8.1.13"
-	}
-	tags = [
-		"${BASE_IMAGE_NAME}:8.1.13"
-	]
-}
-
-
-// This target inherits the pre-8-1-17-base and sets the patch to 14
-target "8-1-14" {
-	inherits = ["pre-8-1-17-base"]
-	args = {
-		IGNITION_VERSION = "8.1.14"
-	}
-	tags = [
-		"${BASE_IMAGE_NAME}:8.1.14"
-	]
-}
-
-// This target inherits the pre-8-1-17-base and sets the patch to 15
-target "8-1-15" {
-	inherits = ["pre-8-1-17-base"]
-	args = {
-		IGNITION_VERSION = "8.1.15"
-	}
-	tags = [
-		"${BASE_IMAGE_NAME}:8.1.15"
-	]
-}
-
-// This target inherits the pre-8-1-17-base and sets the patch to 16
-target "8-1-16" {
-	inherits = ["pre-8-1-17-base"]
-	args = {
-		IGNITION_VERSION = "8.1.16"
-	}
-	tags = [
-		"${BASE_IMAGE_NAME}:8.1.16"
-	]
-}
-
-// ###########################################################################################
 //  IIOT Imaages
 // ###########################################################################################
 
@@ -228,7 +227,7 @@ target "mes-base" {
 	]
 }
 
-target "iiot-8-1-20" {
+target "mes-8-1-20" {
 	inherits = ["mes-base"]
 	args = {
 		IGNITION_VERSION = "8.1.20"

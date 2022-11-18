@@ -1,5 +1,3 @@
-name: "Build and publish"
-
 on:
   workflow_dispatch:
 

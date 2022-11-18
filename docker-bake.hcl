@@ -2,10 +2,33 @@
 
 group "build" {
 	targets = [
-		"current"
-		, "pre-8-1-17"
-		, "mes"
-		, "iiot"
+		"8-1-13",
+		"8-1-14",
+		"8-1-15",
+		"8-1-16",
+		"8-1-17",
+		"8-1-18",
+		"8-1-19",
+		"8-1-20",
+		"8-1-21",
+		"8-1-22",
+		"iiot-8-1-21",
+		"mes-8-1-20"
+	]
+}
+
+group "ignition-base" {
+	targets = [
+		"8-1-13",
+		"8-1-14",
+		"8-1-15",
+		"8-1-16",
+		"8-1-17",
+		"8-1-18",
+		"8-1-19",
+		"8-1-20",
+		"8-1-21",
+		"8-1-22"
 	]
 }
 
@@ -17,73 +40,217 @@ variable "BASE_VERSION" {
     default = "8.1"
 }
 
-variable "LATEST_IGNITION_VERSION" {
+variable "PATCH_VERSION" {
     default = 22
 }
 
-variable "LATEST_MES_VERSION" {
-    default = 20
+// ###########################################################################################
+//  PRE-8-1-17 Imaages
+// ###########################################################################################
+
+target "pre-8-1-17-base" {
+	context = "."
+	dockerfile = "secondary-versions/pre-8-1-17/Dockerfile"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${PATCH_VERSION}"
+	]
 }
 
-variable "LATEST_IIOT_VERSION" {
-    default = 21
-}
-
-target "current" {
-	for_each = range(17, ${LATEST_IGNITION_VERSION})
-    context = "."
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.${each.value}"]
-    cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:cache-${BASE_VERSION}.${each.value}"]
-    platforms = [
-        "linux/amd64", 
-        "linux/arm64", 
-        "linux/arm",
-    ]
-	 tags = [
-        "${BASE_IMAGE_NAME}:${BASE_VERSION}.${each.value}"
-    ]
+// This target inherits the pre-8-1-17-base and sets the patch to 13
+target "8-1-13" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.13"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.13"
+	]
 }
 
 
-target "pre-8-1-17" {
-	for_each = range(13, 16)
-    context = "secondary-versions/pre-8-1-17"
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${each.value}"]
-    cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-17:cache-${BASE_VERSION}.${each.value}"]
-    platforms = [
-        "linux/amd64", 
-        "linux/arm64", 
-        "linux/arm",
-    ]
-	 tags = [
-        "${BASE_IMAGE_NAME}-pre-8.1.17:${BASE_VERSION}.${each.value}"
-    ]
+// This target inherits the pre-8-1-17-base and sets the patch to 14
+target "8-1-14" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.14"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.14"
+	]
 }
 
-target "mes" {
-    context = "secondary-versions/mes"
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:cache-${BASE_VERSION}.${LATEST_MES_VERSION}"]
-    cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:cache-${BASE_VERSION}.${LATEST_MES_VERSION}"]
-    platforms = [
-        "linux/amd64", 
-        "linux/arm64", 
-        "linux/arm",
-    ]
-	 tags = [
-        "${BASE_IMAGE_NAME}:${BASE_VERSION}-mes.${LATEST_MES_VERSION}"
-    ]
+// This target inherits the pre-8-1-17-base and sets the patch to 15
+target "8-1-15" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.15"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.15"
+	]
 }
 
-target "iiot" {
-    context = "secondary-versions/iiot"
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:cache-${BASE_VERSION}.${LATEST_IIOT_VERSION}"]
-    cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:cache-${BASE_VERSION}.${LATEST_IIOT_VERSION}"]
-    platforms = [
-        "linux/amd64", 
-        "linux/arm64", 
-        "linux/arm",
-    ]
-	 tags = [
-        "${BASE_IMAGE_NAME}:${BASE_VERSION}-iiot.${LATEST_IIOT_VERSION}"
-    ]
+// This target inherits the pre-8-1-17-base and sets the patch to 16
+target "8-1-16" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.16"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.16"
+	]
+}
+
+// ###########################################################################################
+//  Current Imaages
+// ###########################################################################################
+
+target "8-1-base" {
+	context = "."
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 17
+target "8-1-17" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.17"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.17"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-18" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.18"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.18"
+	]
+}
+
+
+// This target inherits the 8-1-base and sets the patch to 19
+target "8-1-19" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.19"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.19"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-20" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.20"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.20"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 17
+target "8-1-21" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.21"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.21"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-22" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.22"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.22"
+	]
+}
+
+// ###########################################################################################
+//  IIOT Imaages
+// ###########################################################################################
+
+target "iiot-base" {
+	context = "."
+	dockerfile = "secondary-versions/iiot/Dockerfile"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+target "iiot-8-1-21" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.21"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.21"
+	]
+}
+
+// ###########################################################################################
+//  MES Imaages
+// ###########################################################################################
+
+target "mes-base" {
+	context = "."
+	dockerfile = "secondary-versions/mes/Dockerfile"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+target "mes-8-1-20" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.20"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.20"
+	]
 }

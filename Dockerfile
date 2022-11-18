@@ -29,8 +29,8 @@ RUN if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ 
     fi
     
 # Copy gitignore into the working
-COPY --chown=${IGNITION_UID}:${IGNITION_GID} seed-contents/ /usr/local/bin/seed-contents/
-COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} entrypoint-shim.sh /usr/local/bin/
+COPY --chown=${IGNITION_UID}:${IGNITION_GID} ./seed-contents/ /usr/local/bin/seed-contents/
+COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} ./entrypoint-shim.sh /usr/local/bin/
 
 USER ${IGNITION_UID}:${IGNITION_GID}
 

@@ -2,7 +2,8 @@
 
 group "build" {
 	targets = [
-		"8-1-17"
+		"8-1-17",
+		"8-1-18"
 	]
 }
 
@@ -37,8 +38,6 @@ target "8-1-base" {
 // This target inherits the 8-1-base and sets the patch to 17
 target "8-1-17" {
 	inherits = ["8-1-base"]
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.17"]
-	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.17"]
 	args = {
 		IGNITION_VERSION = "8.1.17"
 	}
@@ -50,8 +49,6 @@ target "8-1-17" {
 // This target inherits the 8-1-base and sets the patch to 18
 target "8-1-18" {
 	inherits = ["8-1-base"]
-	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.18"]
-	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.18"]
 	args = {
 		IGNITION_VERSION = "8.1.18"
 	}

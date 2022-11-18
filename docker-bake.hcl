@@ -2,8 +2,18 @@
 
 group "build" {
 	targets = [
+		"8-1-13",
+		"8-1-14",
+		"8-1-15",
+		"8-1-16",
 		"8-1-17",
-		"8-1-18"
+		"8-1-18",
+		"8-1-19",
+		"8-1-20",
+		"8-1-21",
+		"8-1-22",
+		"iiot-8-1-21",
+		"mes-8-1-20"
 	]
 }
 
@@ -19,6 +29,10 @@ variable "PATCH_VERSION" {
     default = 22
 }
 
+
+// ###########################################################################################
+//  Current Imaages
+// ###########################################################################################
 
 target "8-1-base" {
 	context = "."
@@ -58,75 +72,168 @@ target "8-1-18" {
 }
 
 
+// This target inherits the 8-1-base and sets the patch to 19
+target "8-1-19" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.19"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.19"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-20" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.20"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.20"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 17
+target "8-1-21" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.21"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.21"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 18
+target "8-1-22" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.22"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.22"
+	]
+}
+
+// ###########################################################################################
+//  PRE-8-1-17 Imaages
+// ###########################################################################################
+
+target "pre-8-1-17-base" {
+	context = "secondary-versions/pre-8-1-17/"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+// This target inherits the pre-8-1-17-base and sets the patch to 13
+target "8-1-13" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.13"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.13"
+	]
+}
 
 
+// This target inherits the pre-8-1-17-base and sets the patch to 14
+target "8-1-14" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.14"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.14"
+	]
+}
 
+// This target inherits the pre-8-1-17-base and sets the patch to 15
+target "8-1-15" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.15"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.15"
+	]
+}
 
-// target "current" {
-// 	context = "."
-// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.${each.value}"]
-// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}:${BASE_VERSION}.${each.value}"]
-// 	args = {
-// 		IGNITION_VERSION = "${BASE_VERSION}.${each.value}"
-// 	}
-// 	platforms = [
-// 		"linux/amd64", 
-// 		"linux/arm64", 
-// 		"linux/arm",
-// 	]
-// 		tags = [
-// 		"${BASE_IMAGE_NAME}:${BASE_VERSION}.${each.value}"
-// 	]
-// }
+// This target inherits the pre-8-1-17-base and sets the patch to 16
+target "8-1-16" {
+	inherits = ["pre-8-1-17-base"]
+	args = {
+		IGNITION_VERSION = "8.1.16"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.16"
+	]
+}
 
+// ###########################################################################################
+//  IIOT Imaages
+// ###########################################################################################
 
-// target "pre-8-1-18" {
-// 	context = "secondary-versions/pre-8-1-18"
-// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-18:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-pre-8-1-18:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	args = {
-// 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
-// 	}
-// 	platforms = [
-// 		"linux/amd64", 
-// 		"linux/arm64", 
-// 		"linux/arm",
-// 	]
-// 		tags = [
-// 		"${BASE_IMAGE_NAME}-pre-8.1.18:${BASE_VERSION}.${PATCH_VERSION}"
-// 	]
-// }
+target "iiot-base" {
+	context = "secondary-versions/iiot/"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
 
-// target "mes" {
-// 	context = "secondary-versions/mes"
-// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-mes:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	args = {
-// 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
-// 	}
-// 	platforms = [
-// 		"linux/amd64", 
-// 		"linux/arm64", 
-// 		"linux/arm",
-// 	]
-// 		tags = [
-// 		"${BASE_IMAGE_NAME}:${BASE_VERSION}-mes.${PATCH_VERSION}"
-// 	]
-// }
+target "iiot-8-1-21" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.21"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.21"
+	]
+}
 
-// target "iiot" {
-// 	context = "secondary-versions/iiot"
-// 	cache-to = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	cache-from = ["type=registry,ref=${BASE_IMAGE_NAME}-iiot:${BASE_VERSION}.${PATCH_VERSION}"]
-// 	args = {
-// 		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
-// 	}
-// 	platforms = [
-// 		"linux/amd64", 
-// 		"linux/arm64", 
-// 		"linux/arm",
-// 	]
-// 		tags = [
-// 		"${BASE_IMAGE_NAME}:${BASE_VERSION}-iiot.${PATCH_VERSION}"
-// 	]
-// }
+// ###########################################################################################
+//  MES Imaages
+// ###########################################################################################
+
+target "mes-base" {
+	context = "secondary-versions/mes/"
+	args = {
+		IGNITION_VERSION = "${BASE_VERSION}.${PATCH_VERSION}"
+	}
+	platforms = [
+		"linux/amd64", 
+		"linux/arm64", 
+		"linux/arm",
+	]
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:${BASE_VERSION}.${PATCH_VERSION}"
+	]
+}
+
+target "iiot-8-1-20" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.20"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.20"
+	]
+}

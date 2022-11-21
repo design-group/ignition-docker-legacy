@@ -12,7 +12,7 @@ This image is automatically built for versions 8.1.13-8.1.22, new versions will 
 If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 
 ## Getting the Docker Imgage
-If you're looking at the from git, note that the docker image is actually bwdesigngroup/ignition-docker, not design-group/ignition-docker. 
+If you're looking at this repository from GitHub, note that the docker image is actually `bwdesigngroup/ignition-docker`, not `design-group/ignition-docker`. 
 
 When pulling the docker image, note that using the copy link from the home page (docker pull bwdesigngroup/ignition-docker) may fail with <i>latest not found: manifest unknown: manifest unknown</i>. Using the links from the tags page, where a version is specified (e.g. docker pull bwdesigngroup/ignition-docker:8.1.22) should resolve the issue.
  

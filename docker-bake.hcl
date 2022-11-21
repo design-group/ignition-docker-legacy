@@ -203,7 +203,8 @@ target "8-1-22" {
 		IGNITION_VERSION = "8.1.22"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.22"
+		"${BASE_IMAGE_NAME}:8.1.22",
+		"${BASE_IMAGE_NAME}:latest"
 	]
 }
 
@@ -233,7 +234,8 @@ target "iiot-8-1-21" {
 		IGNITION_VERSION = "8.1.21"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-iiot:8.1.21"
+		"${BASE_IMAGE_NAME}-iiot:8.1.21",
+		"${BASE_IMAGE_NAME}-iiot:latest"
 	]
 }
 
@@ -263,6 +265,7 @@ target "mes-8-1-20" {
 		IGNITION_VERSION = "8.1.20"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-mes:8.1.20"
+		"${BASE_IMAGE_NAME}-mes:8.1.20",
+		"${BASE_IMAGE_NAME}-mes:latest"
 	]
 }

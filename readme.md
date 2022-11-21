@@ -14,7 +14,7 @@ If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 ## Getting the Docker Imgage
 If you're looking at this repository from GitHub, note that the docker image is actually `bwdesigngroup/ignition-docker`, not `design-group/ignition-docker`. 
 
-When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) may fail with _latest not found: manifest unknown: manifest unknown_. Using the links from the tags page, where a version is specified (e.g. `docker pull bwdesigngroup/ignition-docker:8.1.22`) should resolve the issue.
+When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) will automatically pull the most recent version of Ignition configured in the image. For example `:latest` may pull version `8.1.22` as of the time of writing.
  
 ## File Access
 This custom build creates a symlink in the `/workdir` directory to a few of the components in Ignition's `data` directory. This allows you to easily access the files on the host system, and simplifies the necessary `.gitignore` for a project. The following items are symlinked by default, and these are the environment variables that enable them:

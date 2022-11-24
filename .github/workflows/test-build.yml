@@ -4,7 +4,7 @@ on:
 jobs:
   run-checks:
     name: "Lint Code"
-    uses: ./github/checks/lint.yml
+    uses: ./.github/checks/lint.yml
 
   build-base-images:
     name: "Test Build Base Imagse"

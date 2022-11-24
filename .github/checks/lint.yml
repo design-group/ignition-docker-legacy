@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+      - master
+
+name: "Lint Code"
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master

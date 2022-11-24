@@ -10,7 +10,7 @@ declare -A wrapper_args_map=(
 
 main() {  
     # Create the data folder for Ignition for any upcoming symlinks
-    mkdir -p ${IGNITION_INSTALL_LOCATION}/data
+    mkdir -p "${IGNITION_INSTALL_LOCATION}"/data
 
     seed_preloaded_contents
 
@@ -46,9 +46,9 @@ main() {
     done
 
     # If "--" is not alraedy in the args, make sure you append it before the wrapper args
-    if [[ ! " ${args[@]} " =~ " -- " ]]; then
-        args+=( "--" )
-    fi
+	if [[ ! " ${args[*]} " =~ " -- " ]]; then
+		args+=( "--" )
+	fi
 
     # Append the wrapper args to the provided args
     args+=("${wrapper_args[@]}")
@@ -62,12 +62,12 @@ main() {
 seed_preloaded_contents() {
     if [ "$SYMLINK_GITIGNORE" = "true" ]; then
         # Move the gitignore file into the working directory so the host can see it
-        mv ../seed-contents/.gitignore ${WORKING_DIRECTORY}/
+        mv ../seed-contents/.gitignore "${WORKING_DIRECTORY}"/
     fi
     
     if [ "$SYMLINK_LOGBACK" = "true" ]; then
         # Move the logback.xml file into the working directory so the host can see it
-        mv ../seed-contents/logback.xml ${WORKING_DIRECTORY}/logback.xml
+        mv ../seed-contents/logback.xml "${WORKING_DIRECTORY}"/logback.xml
         # Add the -Dlogback.configurationFile=${WORKING_DIRECTORY}/logback.xml property to the wrapper args map
         wrapper_args_map+=( [" -Dlogback.configurationFile"]="${WORKING_DIRECTORY}/logback.xml" )
     fi
@@ -79,9 +79,9 @@ seed_preloaded_contents() {
 ###############################################################################
 symlink_projects() {
     # If the project directory symlink isnt already there, create it
-    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/projects ]; then
-        ln -s ${WORKING_DIRECTORY}/projects ${IGNITION_INSTALL_LOCATION}/data/
-        mkdir -p ${WORKING_DIRECTORY}/projects
+    if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/projects ]; then
+        ln -s "${WORKING_DIRECTORY}"/projects "${IGNITION_INSTALL_LOCATION}"/data/
+        mkdir -p "${WORKING_DIRECTORY}"/projects
     fi
 }
 
@@ -90,10 +90,10 @@ symlink_projects() {
 ###############################################################################
 symlink_themes() {
     # If the modules directory symlink isnt already there, create it
-    if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/modules ]; then
-        mkdir -p ${IGNITION_INSTALL_LOCATION}/data
-        ln -s ${WORKING_DIRECTORY}/modules ${IGNITION_INSTALL_LOCATION}/data/
-        mkdir -p ${WORKING_DIRECTORY}/modules
+    if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/modules ]; then
+        mkdir -p "${IGNITION_INSTALL_LOCATION}"/data
+        ln -s "${WORKING_DIRECTORY}"/modules "${IGNITION_INSTALL_LOCATION}"/data/
+        mkdir -p "${WORKING_DIRECTORY}"/modules
     fi
 }
 
@@ -110,17 +110,17 @@ setup_additional_folder_symlinks() {
     local ADDITIONAL_FOLDERS="${1}"
 
     # Split the ADDITIONAL_FOLDERS string into an array
-    local ADDITIONAL_FOLDERS_ARRAY=(${ADDITIONAL_FOLDERS//,/ })
+    local ADDITIONAL_FOLDERS_ARRAY=("${ADDITIONAL_FOLDERS//,/ }")
 
     # Loop through the array and create symlinks for each folder
     for ADDITIONAL_FOLDER in "${ADDITIONAL_FOLDERS_ARRAY[@]}"; do
         # If the symlink and folder dont exist, create them
-        if [ ! -L ${IGNITION_INSTALL_LOCATION}/data/${ADDITIONAL_FOLDER} ]; then
+        if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/"${ADDITIONAL_FOLDER}" ]; then
             echo "Creating symlink for ${ADDITIONAL_FOLDER}"
-            ln -s ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER} ${IGNITION_INSTALL_LOCATION}/data/
+            ln -s "${WORKING_DIRECTORY}"/"${ADDITIONAL_FOLDER}" "${IGNITION_INSTALL_LOCATION}"/data/
 
              echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
-            mkdir -p ${WORKING_DIRECTORY}/${ADDITIONAL_FOLDER}
+            mkdir -p "${WORKING_DIRECTORY}"/"${ADDITIONAL_FOLDER}"
         fi
     done
 }
@@ -130,7 +130,7 @@ setup_additional_folder_symlinks() {
 ###############################################################################
 copy_modules_to_user_lib() {
     # Copy the modules from the modules folder into the ignition modules folder
-	cp -r /modules/* ${IGNITION_INSTALL_LOCATION}/user-lib/modules/
+	cp -r /modules/* "${IGNITION_INSTALL_LOCATION}"/user-lib/modules/
 }
 
 ###############################################################################
@@ -153,8 +153,9 @@ entrypoint() {
         mv docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
     fi
 
-    echo "Running entrypoint with args ${args[@]}"
-    exec docker-entrypoint.sh "${args[@]}"
+    echo "Running entrypoint with args ${args[*]}"
+    exec docker-entrypoint.sh "${args[*]}"
 }
 
-main "$args"
+
+main "${args[*]}"

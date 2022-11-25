@@ -110,7 +110,7 @@ setup_additional_folder_symlinks() {
     local ADDITIONAL_FOLDERS="${1}"
 
     # Split the ADDITIONAL_FOLDERS string into an array
-    local ADDITIONAL_FOLDERS_ARRAY=("${ADDITIONAL_FOLDERS//,/ }")
+    local ADDITIONAL_FOLDERS_ARRAY=(${ADDITIONAL_FOLDERS//,/ })
 
     # Loop through the array and create symlinks for each folder
     for ADDITIONAL_FOLDER in "${ADDITIONAL_FOLDERS_ARRAY[@]}"; do

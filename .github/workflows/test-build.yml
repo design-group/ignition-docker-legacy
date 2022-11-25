@@ -2,13 +2,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-checks:
-    name: "Lint Code"
-    uses: ./.github/checks/lint.yml
+  # run-checks:
+  #   name: "Lint Code"
+  #   uses: ./.github/checks/lint.yml
 
   build-base-images:
     name: "Test Build Base Imagse"
-    needs: run-checks
+    # needs: run-checks
     uses: ./.github/workflows/multi-arch-build.yml
     with:
       PUSH: false
@@ -19,7 +19,7 @@ jobs:
   
   build-iiot-images:
     name: "Test Build IIOT Images"
-    needs: run-checks
+    # needs: run-checks
     uses: ./.github/workflows/multi-arch-build.yml
     with:
       PUSH: false
@@ -30,7 +30,7 @@ jobs:
   
   build-mes-images:
     name: "Test Build MES Images"
-    needs: run-checks
+    # needs: run-checks
     uses: ./.github/workflows/multi-arch-build.yml
     with:
       PUSH: false

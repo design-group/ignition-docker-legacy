@@ -25,7 +25,7 @@ jobs:
   build:
     name: Setup
 
-    runs-on: [self-hosted, ubuntu-latest-8-cores]
+    runs-on: [bwdgghrunner01, ubuntu-latest-8-cores]
     steps:
       - 
         name: Checkout

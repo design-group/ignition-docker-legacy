@@ -39,6 +39,11 @@ main() {
 		add_developer_mode_args
 	fi
 
+	# If there public address set, add the public address wrapper arguments
+	if [ "$ENABLE_LOCALTEST_ADDRESS" = "Y" ]; then
+		add_localtest_address_args
+	fi
+
      # Convert wrapper args associative array to index array prior to launch
     local wrapper_args=( )
     for key in "${!wrapper_args_map[@]}"; do
@@ -139,6 +144,16 @@ copy_modules_to_user_lib() {
 add_developer_mode_args() {
 	wrapper_args_map+=( [" -Dia.developer.moduleupload"]="true" )
 	wrapper_args_map+=( [" -Dignition.allowunsignedmodules"]="true" )
+}
+
+###############################################################################
+# Add the public address java args so that the gateway can be accessed 
+# from the address provided
+###############################################################################
+add_localtest_address_args() {
+	wrapper_args_map+=( [" -a"]="${HOSTNAME}.localtest.me" )
+	wrapper_args_map+=( [" -h"]="${GATEWAY_HTTP_PORT}" )
+	wrapper_args_map+=( [" -s"]="${GATEWAY_HTTPS_PORT}" )
 }
 
 ###############################################################################

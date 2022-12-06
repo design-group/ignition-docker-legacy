@@ -39,6 +39,11 @@ main() {
 		add_developer_mode_args
 	fi
 
+	# If there public address set, add the public address wrapper arguments
+	if [ "$ENABLE_LOCALTEST_ADDRESS" = "Y" ]; then
+		add_localtest_address_args
+	fi
+
      # Convert wrapper args associative array to index array prior to launch
     local wrapper_args=( )
     for key in "${!wrapper_args_map[@]}"; do
@@ -56,9 +61,9 @@ main() {
     entrypoint "${args[@]}"
 }
 
-###############################################################################
+################################################################################
 # Seed any pre-customized gateway contents into the working directory
-###############################################################################
+################################################################################
 seed_preloaded_contents() {
     if [ "$SYMLINK_GITIGNORE" = "true" ]; then
         # Move the gitignore file into the working directory so the host can see it
@@ -74,9 +79,9 @@ seed_preloaded_contents() {
 }
 
 
-###############################################################################
+################################################################################
 # Create the projects directory and symlink it to the host's projects directory
-###############################################################################
+################################################################################
 symlink_projects() {
     # If the project directory symlink isnt already there, create it
     if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/projects ]; then
@@ -85,9 +90,9 @@ symlink_projects() {
     fi
 }
 
-###############################################################################
+################################################################################
 # Create the themes directory and symlink it to the host's themes directory
-###############################################################################
+################################################################################
 symlink_themes() {
     # If the modules directory symlink isnt already there, create it
     if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/modules ]; then
@@ -99,11 +104,11 @@ symlink_themes() {
 
 
 
-###############################################################################
+################################################################################
 # Setup any additional folder symlinks for things like the /configs folder
 # Arguments:
 #   $1 - Comma separated list of folders to symlink
-###############################################################################
+################################################################################
 setup_additional_folder_symlinks() {
     
     # ADDITIONAL_FOLDERS will be a comma delimited string of file paths to create symlinks for
@@ -125,25 +130,35 @@ setup_additional_folder_symlinks() {
     done
 }
 
-###############################################################################
+################################################################################
 # Copy any modules from the /modules directory into the user lib
-###############################################################################
+################################################################################
 copy_modules_to_user_lib() {
     # Copy the modules from the modules folder into the ignition modules folder
 	cp -r /modules/* "${IGNITION_INSTALL_LOCATION}"/user-lib/modules/
 }
 
-###############################################################################
+################################################################################
 # Enable the developer mode java args so that its easier to upload custom modules
-###############################################################################
+################################################################################
 add_developer_mode_args() {
 	wrapper_args_map+=( [" -Dia.developer.moduleupload"]="true" )
 	wrapper_args_map+=( [" -Dignition.allowunsignedmodules"]="true" )
 }
 
-###############################################################################
+################################################################################
+# Add the public address java args so that the gateway can be accessed 
+# from the address provided
+################################################################################
+add_localtest_address_args() {
+	wrapper_args_map+=( [" -a"]="${HOSTNAME}.localtest.me" )
+	wrapper_args_map+=( [" -h"]="${GATEWAY_HTTP_PORT}" )
+	wrapper_args_map+=( [" -s"]="${GATEWAY_HTTPS_PORT}" )
+}
+
+################################################################################
 # Execute the entrypoint for the container
-###############################################################################
+################################################################################
 entrypoint() {
 
     # Run the entrypoint

@@ -8,9 +8,24 @@ name: "Lint Code"
 
 jobs:
   shellcheck:
-    name: Shellcheck
+    name: Lint Shell Files
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
+  markdownlint:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v2
+        - name: Set up Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
+        - name: Install dependencies
+          run: |
+            npm install -g markdownlint-cli
+        - name: Run markdownlint
+          run: 'find . -name "*.md" | xargs markdownlint'

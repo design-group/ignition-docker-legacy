@@ -4,9 +4,11 @@ args=("$@")
 
 # Declare a map of any potential wrapper arguments to be passed into Ignition upon startup
 declare -A wrapper_args_map=( 
-    [" -Dignition.projects.scanFrequency"]=${PROJECT_SCAN_FREQUENCY:-10 }  # Disable console logging
+    ["-Dignition.projects.scanFrequency"]=${PROJECT_SCAN_FREQUENCY:-10}  # Disable console logging
 )
 
+# Declare a map of potential jvm arguments to be passed into Ignition upon startup, before the wrapper args
+declare -A jvm_args_map=()
 
 main() {  
     # Create the data folder for Ignition for any upcoming symlinks
@@ -50,6 +52,21 @@ main() {
         wrapper_args+=( "${key}=${wrapper_args_map[${key}]}")
     done
 
+	# Convert jvm args associative array to index array prior to launch
+	local jvm_args=( )
+	for key in "${!jvm_args_map[@]}"; do
+		jvm_args+=( "${key}" "${jvm_args_map[${key}]}" )
+	done
+
+	# If "--" is already in the args, insert any jvm args before it, else if it isnt there just append the jvm args
+	if [[ " ${args[*]} " =~ " -- " ]]; then
+		# Insert the jvm args before the "--" in the args array
+		args=( "${args[@]/--/${jvm_args[*]} --}" )
+	else
+		# Append the jvm args to the args array
+		args+=( "${jvm_args[@]}" )
+	fi
+	
     # If "--" is not alraedy in the args, make sure you append it before the wrapper args
 	if [[ ! " ${args[*]} " =~ " -- " ]]; then
 		args+=( "--" )
@@ -74,7 +91,7 @@ seed_preloaded_contents() {
         # Move the logback.xml file into the working directory so the host can see it
         mv ../seed-contents/logback.xml "${WORKING_DIRECTORY}"/logback.xml
         # Add the -Dlogback.configurationFile=${WORKING_DIRECTORY}/logback.xml property to the wrapper args map
-        wrapper_args_map+=( [" -Dlogback.configurationFile"]="${WORKING_DIRECTORY}/logback.xml" )
+        wrapper_args_map+=( ["-Dlogback.configurationFile"]="${WORKING_DIRECTORY}/logback.xml" )
     fi
 }
 
@@ -142,8 +159,8 @@ copy_modules_to_user_lib() {
 # Enable the developer mode java args so that its easier to upload custom modules
 ################################################################################
 add_developer_mode_args() {
-	wrapper_args_map+=( [" -Dia.developer.moduleupload"]="true" )
-	wrapper_args_map+=( [" -Dignition.allowunsignedmodules"]="true" )
+	wrapper_args_map+=( ["-Dia.developer.moduleupload"]="true" )
+	wrapper_args_map+=( ["-Dignition.allowunsignedmodules"]="true" )
 }
 
 ################################################################################
@@ -151,9 +168,9 @@ add_developer_mode_args() {
 # from the address provided
 ################################################################################
 add_localtest_address_args() {
-	wrapper_args_map+=( [" -a"]="${HOSTNAME}.localtest.me" )
-	wrapper_args_map+=( [" -h"]="${GATEWAY_HTTP_PORT}" )
-	wrapper_args_map+=( [" -s"]="${GATEWAY_HTTPS_PORT}" )
+	jvm_args_map+=( ["-a"]="${HOSTNAME}.localtest.me" )
+	jvm_args_map+=( ["-h"]="${GATEWAY_HTTP_PORT:-8088}" )
+	jvm_args_map+=( ["-s"]="${GATEWAY_HTTPS_PORT:-8043}" )
 }
 
 ################################################################################
@@ -168,8 +185,8 @@ entrypoint() {
         mv docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
     fi
 
-    echo "Running entrypoint with args ${args[*]}"
-    exec docker-entrypoint.sh "${args[*]}"
+    echo "Running entrypoint with args $*"
+    exec docker-entrypoint.sh "$@"
 }
 
 

@@ -4,7 +4,7 @@ args=("$@")
 
 # Declare a map of any potential wrapper arguments to be passed into Ignition upon startup
 declare -A wrapper_args_map=( 
-    ["-Dignition.projects.scanFrequency"]=${PROJECT_SCAN_FREQUENCY:-10 }  # Disable console logging
+    ["-Dignition.projects.scanFrequency"]=${PROJECT_SCAN_FREQUENCY:-10}  # Disable console logging
 )
 
 # Declare a map of potential jvm arguments to be passed into Ignition upon startup, before the wrapper args
@@ -55,7 +55,7 @@ main() {
 	# Convert jvm args associative array to index array prior to launch
 	local jvm_args=( )
 	for key in "${!jvm_args_map[@]}"; do
-		jvm_args+=( "${key} ${jvm_args_map[${key}]}")
+		jvm_args+=( "${key}" "${jvm_args_map[${key}]}" )
 	done
 
 	# If "--" is already in the args, insert any jvm args before it, else if it isnt there just append the jvm args

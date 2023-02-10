@@ -12,6 +12,8 @@ group "build" {
 		"8-1-20",
 		"8-1-21",
 		"8-1-22",
+		"8-1-23",
+		"8-1-24
 		"iiot-8-1-21",
 		"mes-8-1-20"
 	]
@@ -28,7 +30,9 @@ group "ignition-base" {
 		"8-1-19",
 		"8-1-20",
 		"8-1-21",
-		"8-1-22"
+		"8-1-22",
+		"8-1-23",
+		"8-1-24"
 	]
 }
 
@@ -53,7 +57,7 @@ variable "BASE_VERSION" {
 }
 
 variable "PATCH_VERSION" {
-    default = 22
+    default = 24
 }
 
 // ###########################################################################################
@@ -122,7 +126,7 @@ target "8-1-16" {
 }
 
 // ###########################################################################################
-//  Current Imaages
+//  Current Images
 // ###########################################################################################
 
 target "8-1-base" {
@@ -174,7 +178,7 @@ target "8-1-19" {
 	]
 }
 
-// This target inherits the 8-1-base and sets the patch to 18
+// This target inherits the 8-1-base and sets the patch to 20
 target "8-1-20" {
 	inherits = ["8-1-base"]
 	args = {
@@ -185,7 +189,7 @@ target "8-1-20" {
 	]
 }
 
-// This target inherits the 8-1-base and sets the patch to 17
+// This target inherits the 8-1-base and sets the patch to 21
 target "8-1-21" {
 	inherits = ["8-1-base"]
 	args = {
@@ -196,7 +200,7 @@ target "8-1-21" {
 	]
 }
 
-// This target inherits the 8-1-base and sets the patch to 18
+// This target inherits the 8-1-base and sets the patch to 22
 target "8-1-22" {
 	inherits = ["8-1-base"]
 	args = {
@@ -204,6 +208,30 @@ target "8-1-22" {
 	}
 	tags = [
 		"${BASE_IMAGE_NAME}:8.1.22",
+		"${BASE_IMAGE_NAME}:latest"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 23
+target "8-1-23" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.23"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.23",
+		"${BASE_IMAGE_NAME}:latest"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 24
+target "8-1-24" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.24"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.24",
 		"${BASE_IMAGE_NAME}:latest"
 	]
 }

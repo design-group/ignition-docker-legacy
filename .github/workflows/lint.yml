@@ -16,14 +16,14 @@ jobs:
         uses: ludeeus/action-shellcheck@master
   markdownlint:
     name: Lint Markdown
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
         - uses: actions/checkout@v2
         - name: Set up Node.js
           uses: actions/setup-node@v1
           with:
-            node-version: '12.x'
+            node-version: '19.x'
         - name: Install dependencies
           run: |
             npm install -g markdownlint-cli

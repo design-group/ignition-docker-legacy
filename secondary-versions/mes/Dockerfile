@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.20"
+ARG IGNITION_VERSION="8.1.22"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
 # Switch to root user to install additional packages
@@ -7,22 +7,22 @@ USER root
 # Install some prerequisite packages
 RUN apt-get update && apt-get install -y wget
 
-ARG WEB_SERVICES_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Web_Service-module.modl"
-ARG WEB_SERVICES_MODULE_DOWNLOAD_SHA256="4d10f426715ece135d96473e1d8ea1ca651aa1d612332ab52eb22d234f9d030a"
-ARG PRODUCTION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Production-module.modl"
-ARG PRODUCTION_MODULE_DOWNLOAD_SHA256="b3612a7b1cebe4f9b5fbf553cde85fe87de78e3b1b0cea338c7056586eef7b9d"
-ARG SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Settings_and_Changeover-module.modl"
-ARG SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_SHA256="bc0e686630a324c66da8397cf099aaf7de52cc579cc1fb76a09151e0ad208a66"
-ARG BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Batch-module.modl"
-ARG BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_SHA256="abf2bca9b45086d1fb9d78f57595ce6e3f924c183836e7440c132f15a39f3762"
-ARG SPC_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/SPC-module.modl"
-ARG SPC_MODULE_DOWNLOAD_SHA256="8f597843e765997d4a57a7bf76018a651c019d85e4499359692eddbf29c84ea3"
-ARG DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Document_Management-module.modl"
-ARG DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_SHA256="09a7e327dd865dddc8715e54ef88f7d691e71add10ee35d11e07b319dd710a64"
-ARG OEE_DOWNTIME_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/OEE_Downtime-module.modl"
-ARG OEE_DOWNTIME_MODULE_DOWNLOAD_SHA256="6dd14f775030206189c72e3c7504fb7983283757c0738d3269f53e25a74b26e1"
-ARG TRACK_AND_TRACE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022110119/Trace-module.modl"
-ARG TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256="4fed01d4f4e081f88dc1d0715a142e5f60668b6ba372eb7f6ae5128be926f257"
+ARG WEB_SERVICES_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Web_Service-module.modl"
+ARG WEB_SERVICES_MODULE_DOWNLOAD_SHA256="b3c7f2aaf963bb26152f98b9f58379c3214a6539ab3a24a8f556e087f6228167"
+ARG PRODUCTION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Production-module.modl"
+ARG PRODUCTION_MODULE_DOWNLOAD_SHA256="28619de31a1ca3055992004ee4a0999dd10209d991381c7edb8e14ed5f63ca5b"
+ARG SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Settings_and_Changeover-module.modl"
+ARG SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_SHA256="034f38c47655ab68cd8c027672155f89beb06cf501bb7e6858dafd3fe592d659"
+ARG BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Batch-module.modl"
+ARG BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_SHA256="bb7cd6275977b7a1a1d567a08d55c859096d6476feb9fa14e849c1e03998a6b7"
+ARG SPC_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/SPC-module.modl"
+ARG SPC_MODULE_DOWNLOAD_SHA256="39ef7e3e5a0381b5f1da52be27fe036fe7ecea06fa470e50b5aa89173fbbb0ec"
+ARG DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Document_Management-module.modl"
+ARG DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_SHA256="3a4c8f202b792d4a8ffccbc8bb324259d3e0fe489d27f2716869a831b2e06eed"
+ARG OEE_DOWNTIME_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/OEE_Downtime-module.modl"
+ARG OEE_DOWNTIME_MODULE_DOWNLOAD_SHA256="481fa661e47c742f39743f26d3946a0017b5788a44dfc43d56112ad345a0fd2b"
+ARG TRACK_AND_TRACE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/sepasoft/3.81.6.2022112218/Trace-module.modl"
+ARG TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256="017b47ca40a00b5c20cf51d62a3e42bb2edd2d52ebd286dd4f1cec0a71b0b4d8"
 
 # Download the MQTT modules and store them in the /modules/pre-loaded-modules folder
 RUN mkdir -p /modules/pre-loaded-modules && \

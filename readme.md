@@ -14,7 +14,7 @@ If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 
 ___
 
-## Getting the Docker Imgage
+## Getting the Docker Image
 
 If you're looking at this repository from GitHub, note that the docker image is actually `bwdesigngroup/ignition-docker`, not `design-group/ignition-docker`.
 

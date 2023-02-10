@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.20"
+ARG IGNITION_VERSION="8.1.24"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
 # Switch to root user to install additional packages

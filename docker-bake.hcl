@@ -14,8 +14,8 @@ group "build" {
 		"8-1-22",
 		"8-1-23",
 		"8-1-24
-		"iiot-8-1-21",
-		"mes-8-1-20"
+		"iiot-8-1-24",
+		"mes-8-1-22"
 	]
 }
 
@@ -38,13 +38,13 @@ group "ignition-base" {
 
 group "ignition-iiot" {
 	targets = [
-		"iiot-8-1-21"
+		"iiot-8-1-24"
 	]
 }
 
 group "ignition-mes" {
 	targets = [
-		"mes-8-1-20"
+		"mes-8-1-22"
 	]
 }
 
@@ -256,13 +256,13 @@ target "iiot-base" {
 	]
 }
 
-target "iiot-8-1-21" {
+target "iiot-8-1-24" {
 	inherits = ["iiot-base"]
 	args = {
-		IGNITION_VERSION = "8.1.21"
+		IGNITION_VERSION = "8.1.24"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-iiot:8.1.21",
+		"${BASE_IMAGE_NAME}-iiot:8.1.24",
 		"${BASE_IMAGE_NAME}-iiot:latest"
 	]
 }
@@ -287,13 +287,13 @@ target "mes-base" {
 	]
 }
 
-target "mes-8-1-20" {
+target "mes-8-1-22" {
 	inherits = ["mes-base"]
 	args = {
-		IGNITION_VERSION = "8.1.20"
+		IGNITION_VERSION = "8.1.22"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-mes:8.1.20",
+		"${BASE_IMAGE_NAME}-mes:8.1.22",
 		"${BASE_IMAGE_NAME}-mes:latest"
 	]
 }

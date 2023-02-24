@@ -61,6 +61,7 @@ This image also preloads the following environment variables by default:
 | `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
 | `DEVELOPER_MODE` | 8.1.13 | `N` |
 | `ENABLE_LOCALTEST_ADDRESS` | 8.1.13 | `Y` |
+| `DISABLE_QUICKSTART` | 8.1.23 | `true` |
 
 ### logback.xml
 

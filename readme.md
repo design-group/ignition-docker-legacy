@@ -104,10 +104,10 @@ It takes the `MES_MODULES_ENABLED` environment variable that is a comma separate
 
 Any additional modules outside of the native ignition ones that want to be added can be mapped into the `/modules` folder in the container. This is done by adding the following to the `volumes` section of the `docker-compose.yml` file:
 
-```yaml
-volumes:
-  - ./my-local-modules:/modules
-```
+	```yaml
+		volumes:
+		- ./my-local-modules:/modules
+	```
 
 Due to the way module onboarding works, in order for it to take effect, you must restart the container after its initial creation. This can be done by running `docker-compose restart` from the directory containing the `docker-compose.yml` file.
 
@@ -115,18 +115,18 @@ ___
 
 ### Example docker-compose file
 
-```yaml
-services:
-  gateway:
-	image: bwdesigngroup/ignition-docker:8.1.24
-	ports:
-	  - 80:8088
-	## In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file
-	# volumes:
-	# - ./data-folder:/workdir
-	# environment:
-	# - ADDITIONAL_DATA_FOLDERS=one-folder,other-folder
-```
+	```yaml
+		services:
+		gateway:
+			image: bwdesigngroup/ignition-docker:8.1.24
+			ports:
+			- 80:8088
+			## In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file
+			# volumes:
+			# - ./data-folder:/workdir
+			# environment:
+			# - ADDITIONAL_DATA_FOLDERS=one-folder,other-folder
+	```
 
 ___
 
@@ -135,20 +135,22 @@ ___
 This repository uses [pre-commit](https://pre-commit.com/) to enforce code style. To install the pre-commit hooks, run `pre-commit install` from the root of the repository. This will run the hooks on every commit. If you would like to run the hooks manually, run `pre-commit run --all-files` from the root of the repository.
 
 ### Local Feature Testing
+
 In order to test your features, you can use the following procedure to build and run your own images:
 
 1. Open a terminal or command prompt on your host machine.
 2. Navigate to the directory containing both `Dockerfile` and the `docker-bake.hcl`
 3. Run `docker build --file Dockerfile -t <your-image-name>  . | docker bake -f docker-bake.hcl -`
 4. In a new directory, make a `docker-compose.yml` file using the Example docker-compose file above substituting the value for `image` for `<your-image-name>`. See example below:
-  ```yaml
-services:
-	gateway:
-	image: <your-image-name>
-	ports:
-		- 80:8088
-```
-5. Run `docker-compose 
+
+		services:
+			gateway:
+				image: <your-image-name>
+				ports:
+					- 80:8088
+
+5. Run `docker-compose up -d` in the directory containing your `docker-compose.yml` file.
+
 ### Requests
 
 If you have any requests for additional features, please feel free to [open an issue](https://github.com/design-group/ignition-docker/issues/new/choose) or submit a pull request.

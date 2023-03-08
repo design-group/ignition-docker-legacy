@@ -9,7 +9,7 @@ main() {
 	enable_mes_modules
 
 	echo "Starting entrypoint-shim with args: $*"
-	exec entrypoint-shim.sh "$*"
+	exec entrypoint-shim.sh "$@"
 }
 
 ###############################################################################

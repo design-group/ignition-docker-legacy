@@ -7,7 +7,7 @@ main() {
 	enable_iiot_modules
 
 	echo "Starting entrypoint-shim with args: $*"
-	exec entrypoint-shim.sh "$*"
+	exec entrypoint-shim.sh "$@"
 }
 
 ###############################################################################

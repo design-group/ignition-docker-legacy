@@ -7,7 +7,8 @@
    then restart your computer for the WSL installation to take affect.
 3. Install the [WSL 2 Kernel](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 4. After the installation, change the default version with `wsl --set-version Ubuntu 2`.
-5. Once installation is complete, create creations for the 'Ubuntu for Windows' application
+5. After changing the default version, run `wsl --update` to make sure the kernel is fully up to date.
+6. Once update is complete, create credentialsw for the 'Ubuntu for Windows' application
    that was installed or by typing `wsl` in command prompt.
 
 *The entry prompt will not show any characters as you type your password.*

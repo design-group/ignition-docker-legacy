@@ -8,17 +8,17 @@
 
 The purpose of this image is to provide a quick way to spin up docker containers that include some necessary creature comforts for version control, theme management, and easy interaction with the required file system components for an Ignition gateway.
 
-This image is automatically built for versions 8.1.13-8.1.22, new versions will be updated, but any features are subject to change with later versions. Upon a new pull request, if a valid build file is modified, it will trigger a build test pipeline that verifies the image still operates as expected.
+This image is automatically built for versions 8.1.13-8.1.25, new versions will be updated, but any features are subject to change with later versions. Upon a new pull request, if a valid build file is modified, it will trigger a build test pipeline that verifies the image still operates as expected.
 
 If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 
 ___
 
-## Getting the Docker Imgage
+## Getting the Docker Image
 
 If you're looking at this repository from GitHub, note that the docker image is actually `bwdesigngroup/ignition-docker`, not `design-group/ignition-docker`.
 
-When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) will automatically pull the most recent version of Ignition configured in the image. For example `:latest` may pull version `8.1.22` as of the time of writing.
+When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) will automatically pull the most recent version of Ignition configured in the image. For example `:latest` may pull version `8.1.25` as of the time of writing.
 
 ## File Access
 
@@ -61,6 +61,7 @@ This image also preloads the following environment variables by default:
 | `ADDITIONAL_DATA_FOLDERS` | 8.1.13 | `""` |
 | `DEVELOPER_MODE` | 8.1.13 | `N` |
 | `ENABLE_LOCALTEST_ADDRESS` | 8.1.13 | `Y` |
+| `DISABLE_QUICKSTART` | 8.1.23 | `true` |
 
 ### logback.xml
 
@@ -104,8 +105,8 @@ It takes the `MES_MODULES_ENABLED` environment variable that is a comma separate
 Any additional modules outside of the native ignition ones that want to be added can be mapped into the `/modules` folder in the container. This is done by adding the following to the `volumes` section of the `docker-compose.yml` file:
 
 	```yaml
-	volumes:
-	- ./my-local-modules:/modules
+		volumes:
+		- ./my-local-modules:/modules
 	```
 
 Due to the way module onboarding works, in order for it to take effect, you must restart the container after its initial creation. This can be done by running `docker-compose restart` from the directory containing the `docker-compose.yml` file.
@@ -116,15 +117,15 @@ ___
 
 	```yaml
 	services:
-	gateway:
-		image: bwdesigngroup/ignition-docker:8.1.22
-		ports:
-		- 80:8088
-		# # In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file
-		# volumes:
-		#   - ./data-folder:/workdir
-		# environment:
-		#   - ADDITIONAL_DATA_FOLDERS=one-folder,other-folder
+	  gateway:
+		  image: bwdesigngroup/ignition-docker:8.1.25
+		  ports:
+		  - 80:8088
+		  # # In order to use this volume, you must first create the directory `data-folder` next to the docker-compose.yml file
+		  # volumes:
+		  #   - ./data-folder:/workdir
+		  # environment:
+		  #   - ADDITIONAL_DATA_FOLDERS=one-folder,other-folder
 	```
 
 ___
@@ -132,6 +133,23 @@ ___
 ### Contributing
 
 This repository uses [pre-commit](https://pre-commit.com/) to enforce code style. To install the pre-commit hooks, run `pre-commit install` from the root of the repository. This will run the hooks on every commit. If you would like to run the hooks manually, run `pre-commit run --all-files` from the root of the repository.
+
+### Local Feature Testing
+
+In order to test your features, you can use the following procedure to build and run your own images:
+
+1. Open a terminal or command prompt on your host machine.
+2. Navigate to the directory containing both `Dockerfile` and the `docker-bake.hcl`
+3. Run `docker build --file Dockerfile -t <your-image-name>  . | docker bake -f docker-bake.hcl -`
+4. In a new directory, make a `docker-compose.yml` file using the Example docker-compose file above substituting the value for `image` for `<your-image-name>`. See example below:
+
+		services:
+			gateway:
+				image: <your-image-name>
+				ports:
+					- 80:8088
+
+5. Run `docker-compose up -d` in the directory containing your `docker-compose.yml` file.
 
 ### Requests
 

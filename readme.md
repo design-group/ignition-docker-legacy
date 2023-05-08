@@ -151,6 +151,12 @@ In order to test your features, you can use the following procedure to build and
 
 5. Run `docker-compose up -d` in the directory containing your `docker-compose.yml` file.
 
+### Building a pushing a specific version
+
+1. Open a terminal or command prompt on your host machine.
+2. Navigate to the directory containing both `Dockerfile` and the `docker-bake.hcl`
+3. Run `docker buildx bake --file ./docker-bake.hcl <build-target> --push`
+
 ### Requests
 
 If you have any requests for additional features, please feel free to [open an issue](https://github.com/design-group/ignition-docker/issues/new/choose) or submit a pull request.

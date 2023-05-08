@@ -168,9 +168,21 @@ add_developer_mode_args() {
 # from the address provided
 ################################################################################
 add_localtest_address_args() {
-	jvm_args_map+=( ["-a"]="${HOSTNAME}.localtest.me" )
-	jvm_args_map+=( ["-h"]="${GATEWAY_HTTP_PORT:-8088}" )
-	jvm_args_map+=( ["-s"]="${GATEWAY_HTTPS_PORT:-8043}" )
+
+	# if -a is not already in the args, add it
+	if [[ ! " ${args[*]} " =~ " -a " ]]; then
+		jvm_args_map+=( ["-a"]="${GATEWAY_PUBLIC_ADDRESS}" )
+	fi
+
+	# if -h is not already in the args, add it
+	if [[ ! " ${args[*]} " =~ " -h " ]]; then
+		jvm_args_map+=( ["-h"]="${GATEWAY_PUBLIC_HTTP_PORT}" )
+	fi
+
+	# if -s is not already in the args, add it
+	if [[ ! " ${args[*]} " =~ " -s " ]]; then
+		jvm_args_map+=( ["-s"]="${GATEWAY_PUBLIC_HTTPS_PORT}" )
+	fi
 }
 
 ################################################################################

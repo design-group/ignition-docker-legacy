@@ -15,6 +15,8 @@ group "build" {
 		"8-1-23",
 		"8-1-24",
 		"8-1-25",
+		"8-1-26",
+		"8-1-27",
 		"iiot-8-1-25",
 		"mes-8-1-22"
 	]
@@ -34,7 +36,9 @@ group "ignition-base" {
 		"8-1-22",
 		"8-1-23",
 		"8-1-24",
-		"8-1-25"
+		"8-1-25",
+		"8-1-26",
+		"8-1-27"
 	]
 }
 
@@ -59,7 +63,7 @@ variable "BASE_VERSION" {
 }
 
 variable "PATCH_VERSION" {
-    default = 25
+    default = 27
 }
 
 // ###########################################################################################
@@ -209,8 +213,7 @@ target "8-1-22" {
 		IGNITION_VERSION = "8.1.22"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.22",
-		"${BASE_IMAGE_NAME}:latest"
+		"${BASE_IMAGE_NAME}:8.1.22"
 	]
 }
 
@@ -221,8 +224,7 @@ target "8-1-23" {
 		IGNITION_VERSION = "8.1.23"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.23",
-		"${BASE_IMAGE_NAME}:latest"
+		"${BASE_IMAGE_NAME}:8.1.23"
 	]
 }
 
@@ -233,8 +235,7 @@ target "8-1-24" {
 		IGNITION_VERSION = "8.1.24"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.24",
-		"${BASE_IMAGE_NAME}:latest"
+		"${BASE_IMAGE_NAME}:8.1.24"
 	]
 }
 
@@ -245,7 +246,29 @@ target "8-1-25" {
 		IGNITION_VERSION = "8.1.25"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.25",
+		"${BASE_IMAGE_NAME}:8.1.25"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 26
+target "8-1-26" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.26"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.26"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 27
+target "8-1-27" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.27"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.27",
 		"${BASE_IMAGE_NAME}:latest"
 	]
 }

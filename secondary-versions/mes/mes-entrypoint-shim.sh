@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MES_MODULES_ENABLED=${MES_MODULES_ENABLED:-productin,oee-downtime}
+MES_MODULES_ENABLED=${MES_MODULES_ENABLED:-production,oee-downtime}
 
 
 

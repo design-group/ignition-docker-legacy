@@ -10,7 +10,7 @@ The purpose of this image is to provide a quick way to spin up docker containers
 
 This image is automatically built for versions 8.1.13-8.1.28, new versions will be updated, but any features are subject to change with later versions. Upon a new pull request, if a valid build file is modified, it will trigger a build test pipeline that verifies the image still operates as expected.
 
-If using a windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
+If using a Windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 
 ___
 

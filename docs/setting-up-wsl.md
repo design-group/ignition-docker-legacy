@@ -8,8 +8,7 @@
 3. Install the [WSL 2 Kernel](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 4. After the installation, change the default version with `wsl --set-version Ubuntu 2`.
 5. After changing the default version, run `wsl --update` to make sure the kernel is fully up to date.
-6. Once update is complete, create credentialsw for the 'Ubuntu for Windows' application
-   that was installed or by typing `wsl` in command prompt.
+6. Once update is complete, create credentialsw for the 'Ubuntu for Windows' application that was installed or by typing `wsl` in command prompt.
 
 *The entry prompt will not show any characters as you type your password.*
 
@@ -33,11 +32,13 @@ Install the following programs:
 
 Docker is a tool that makes it easy to set up containerized applications from existing images. Your Ignition development environment will live inside a Docker container.
 
-We will not be using Docker Desktop for Windows for this project. We will instead be downloading and installing Docker onto Ubuntu within WSL. All commands in this section will need to be run in Ubuntu.
+We will not be using Docker Desktop for Windows for this project. We will instead be downloading and installing Docker onto Ubuntu within WSL.
+
+**All commands in this section will need to be run in WSL Ubuntu**.
 
 ### Install Docker
 
-From inside VSCode, ``CTRL+Shift+` `` to open a terminal panel.
+From inside VS Code, ``CTRL+Shift+` `` to open a terminal panel.
 
  Check the '>' icon at the top right of the terminal panel says 'wsl'. To change to wsl the plus '+' icon has a drop down menu that can select/ change the default terminal profile to 'wsl'.
 
@@ -45,10 +46,10 @@ From inside VSCode, ``CTRL+Shift+` `` to open a terminal panel.
 2. Install Docker with `sudo apt install docker.io -y`.
 3. Check the Docker installation by running `docker --version`.
 
-### Configure wsl to launch docker at startup
+### Configure WSL to Launch Docker at Startup
 
 1. Open file that controls sudo command execution: `sudo visudo`.
-2. Add the following code to the end of your file. ("yourusername" is the ubuntu username you set)
+2. Add the following code to the end of your file. ("yourusername" is the ubuntu username you set).
 
 	```bash
 	# Docker daemon specification
@@ -58,7 +59,7 @@ From inside VSCode, ``CTRL+Shift+` `` to open a terminal panel.
 3. Press `CTRL+X` to exit.
 4. Press `Y` to confirm save.
 5. Press `ENTER` to confirm file name.
-6. Open bash configuration file in vs-code: `code ~/.bashrc`. It will install vs-code server in WSL, making it easier to access these files in the future.
+6. Open bash configuration file in vs-code: `code ~/.bashrc`. It will install vs-code server in WSL, making it easier to access these files in the future. Note: if you have isssues on this step, you may need to reboot your host computer.
 7. Add the following to the end of the file:
 
 	```bash
@@ -77,7 +78,7 @@ From inside VSCode, ``CTRL+Shift+` `` to open a terminal panel.
 
 ### Install Docker Compose
 
-1. Download latest version of Docker Compose:
+1. Download the latest version of Docker Compose:
 
 	```bash
 	sudo curl -kL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose

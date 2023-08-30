@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-ignition_version = "8.1.27"
+ignition_version = "8.1.31"
 base_url = "https://inductiveautomation.com/downloads/third-party-modules/%s" % ignition_version
 
 browser = webdriver.Safari()

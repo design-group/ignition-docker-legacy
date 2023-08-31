@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.24"
+ARG IGNITION_VERSION="8.1.31"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
 # Switch to root user to install additional packages
@@ -7,13 +7,12 @@ USER root
 # Install some prerequisite packages
 RUN apt-get update && apt-get install -y wget
 
-
-ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.16/MQTT-Distributor-signed.modl"
-ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_SHA256="899e170b8ceb81800ab57b0e4c729db0dddfe7bef6199a30f127efe31ef6d8e2"
-ARG MQTT_ENGINE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.16/MQTT-Engine-signed.modl"
-ARG MQTT_ENGINE_MODULE_DOWNLOAD_SHA256="899e170b8ceb81800ab57b0e4c729db0dddfe7bef6199a30f127efe31ef6d8e2"
-ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.16/MQTT-Transmission-signed.modl"
-ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256="59d9334196284ee449816269a60ed74f918f2ec093e31086271a454f04167208"
+ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.18/MQTT-Distributor-signed.modl"
+ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_SHA256="62b9015f1969a1b681d21c5f50df6acd2db89c90db9c1c7e34e152bec1a6869a"
+ARG MQTT_ENGINE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.18/MQTT-Engine-signed.modl"
+ARG MQTT_ENGINE_MODULE_DOWNLOAD_SHA256="82eb547e389785c53162842c26edc957237d3723814aea065065be2493a93315"
+ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.18/MQTT-Transmission-signed.modl"
+ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256="6b4db1cc3bba0263c28ac33ba7addd3ee2ff25f01aa6b937cbd9dc09ba7f39fa"
 
 RUN mkdir -p /modules/pre-loaded-modules && \
 	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://inductiveautomation.com/* -O "/modules/pre-loaded-modules/MQTT-Distributor.modl" "${MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL}" && \

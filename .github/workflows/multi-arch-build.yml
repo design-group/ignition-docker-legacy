@@ -51,6 +51,6 @@ jobs:
         name: Build
         uses: docker/bake-action@v2.3.0
         with:
-          files: ./docker-bake.hcl
+          files: ./post-8-1-25-docker-bake.hcl
           targets: ${{ inputs.TARGET }}
           push: ${{ inputs.PUSH }}

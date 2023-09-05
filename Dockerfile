@@ -24,21 +24,7 @@ ENV SYMLINK_PROJECTS ${SYMLINK_PROJECTS:-true}
 ENV SYMLINK_THEMES ${SYMLINK_THEMES:-true}
 ENV ADDITIONAL_DATA_FOLDERS ${ADDITIONAL_DATA_FOLDERS:-}
 
-# Setup dedicated user
-RUN groupmod -g ${IGNITION_GID} ignition && \
-    usermod -u ${IGNITION_UID} ignition && \
-    chown -R ${IGNITION_UID}:${IGNITION_GID} /usr/local/bin/
-
-# Check if any of the symlinks are enabled, if so, create the working directory
-RUN if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then \
-    mkdir -p ${WORKING_DIRECTORY} && \
-    chown -R  ${IGNITION_UID}:${IGNITION_GID} ${WORKING_DIRECTORY}; \
-    fi
-    
-# Copy gitignore into the working
-COPY --chown=${IGNITION_UID}:${IGNITION_GID} ./seed-contents/ /usr/local/bin/seed-contents/
-COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} ./entrypoint-shim.sh /usr/local/bin/
-
-USER ${IGNITION_UID}:${IGNITION_GID}
+COPY --chmod=0755 ./entrypoint-shim.sh /usr/local/bin/
+COPY ./seed-contents/ /usr/local/bin/seed-contents/
 
 ENTRYPOINT [ "entrypoint-shim.sh" ]

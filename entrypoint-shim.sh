@@ -14,22 +14,27 @@ main() {
     # Create the data folder for Ignition for any upcoming symlinks
     mkdir -p "${IGNITION_INSTALL_LOCATION}"/data
 
-    seed_preloaded_contents
+	if [ "$SYMLINK_LOGBACK" = "true" ] || [ "$SYMLINK_PROJECTS" = "true" ] || [ "$SYMLINK_THEMES" = "true" ]; then
+		# Create the working directory
+		mkdir -p "${WORKING_DIRECTORY}"
 
-     # Create the symlink for the projects folder if enabled
-    if [ "$SYMLINK_PROJECTS" = "true" ]; then
-        symlink_projects
-    fi
+		seed_preloaded_contents
 
-    # Create the symlink for the themes folder if enabled
-    if [ "$SYMLINK_THEMES" = "true" ]; then
-        symlink_themes
-    fi
+		# Create the symlink for the projects folder if enabled
+		if [ "$SYMLINK_PROJECTS" = "true" ]; then
+			symlink_projects
+		fi
 
-    # If there are additional folders to symlink, run the function
-    if [ -n "$ADDITIONAL_DATA_FOLDERS" ]; then
-        setup_additional_folder_symlinks "$ADDITIONAL_DATA_FOLDERS";
-    fi
+		# Create the symlink for the themes folder if enabled
+		if [ "$SYMLINK_THEMES" = "true" ]; then
+			symlink_themes
+		fi
+
+		# If there are additional folders to symlink, run the function
+		if [ -n "$ADDITIONAL_DATA_FOLDERS" ]; then
+			setup_additional_folder_symlinks "$ADDITIONAL_DATA_FOLDERS";
+		fi
+	fi
 
     # If there are any modules mapped into the /modules directory, copy them to the user lib
     if [ -d "/modules" ]; then
@@ -75,7 +80,25 @@ main() {
     # Append the wrapper args to the provided args
     args+=("${wrapper_args[@]}")
 
+	# Create the dedicated user
+	create_dedicated_user
+
     entrypoint "${args[@]}"
+}
+
+################################################################################
+# Setup a dedicated user based off the UID and GID provided
+################################################################################
+create_dedicated_user() {
+	# Setup dedicated user
+	groupmod -g "${IGNITION_GID}" ignition
+	usermod -u "${IGNITION_UID}" ignition
+	chown -R "${IGNITION_UID}":"${IGNITION_GID}" /usr/local/bin/
+
+	# If the /workdir folder exists, chown it to the dedicated user
+	if [ -d "${WORKING_DIRECTORY}" ]; then
+		chown -R "${IGNITION_UID}":"${IGNITION_GID}" "${WORKING_DIRECTORY}"
+	fi
 }
 
 ################################################################################

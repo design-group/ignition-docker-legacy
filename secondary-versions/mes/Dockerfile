@@ -1,7 +1,6 @@
 ARG IGNITION_VERSION="8.1.31"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
-# Switch to root user to install additional packages
 USER root
 
 # Install some prerequisite packages
@@ -43,9 +42,6 @@ RUN mkdir -p /modules/pre-loaded-modules && \
 	echo "${TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Trace.modl" | sha256sum -c - && \
 	chown -R ${IGNITION_UID}:${IGNITION_GID} /modules
 
-COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} secondary-versions/mes/mes-entrypoint-shim.sh /usr/local/bin/
-
-# Switch back to the ignition user
-USER ${IGNITION_UID}:${IGNITION_GID}
+COPY secondary-versions/mes/mes-entrypoint-shim.sh /usr/local/bin/
 
 ENTRYPOINT [ "mes-entrypoint-shim.sh" ]

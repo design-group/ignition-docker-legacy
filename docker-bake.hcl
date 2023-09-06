@@ -1,6 +1,6 @@
 # docker-bake.hcl
 
-group "build" {
+group "all" {
 	targets = [
 		"8-1-13",
 		"8-1-14",
@@ -38,7 +38,7 @@ group "build" {
 	]
 }
 
-group "ignition-base" {
+group "base" {
 	targets = [
 		"8-1-13",
 		"8-1-14",
@@ -61,7 +61,7 @@ group "ignition-base" {
 	]
 }
 
-group "ignition-iiot" {
+group "iiot" {
 	targets = [
 		"iiot-8-1-25",
 		"iiot-8-1-26",
@@ -72,7 +72,7 @@ group "ignition-iiot" {
 	]
 }
 
-group "ignition-mes" {
+group "mes" {
 	targets = [
 		"mes-8-1-22",
 		"mes-8-1-23",

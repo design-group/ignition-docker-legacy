@@ -1,7 +1,6 @@
 ARG IGNITION_VERSION="8.1.31"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
-# Switch to root user to install additional packages
 USER root
 
 # Install some prerequisite packages
@@ -23,9 +22,6 @@ RUN mkdir -p /modules/pre-loaded-modules && \
 	echo "${MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/MQTT-Transmission.modl" | sha256sum -c - && \
 	chown -R ${IGNITION_UID}:${IGNITION_GID} /modules
 
-COPY --chmod=0755 --chown=${IGNITION_UID}:${IGNITION_GID} secondary-versions/iiot/iiot-entrypoint-shim.sh /usr/local/bin/
-
-# Switch back to the ignition user
-USER ${IGNITION_UID}:${IGNITION_GID}
+COPY secondary-versions/iiot/iiot-entrypoint-shim.sh /usr/local/bin/
 
 ENTRYPOINT [ "iiot-entrypoint-shim.sh" ]

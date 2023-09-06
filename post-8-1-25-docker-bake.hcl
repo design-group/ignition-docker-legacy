@@ -23,7 +23,7 @@ group "all" {
 	]
 }
 
-group "ignition-base" {
+group "base" {
 	targets = [
 		"8-1-25",
 		"8-1-26",
@@ -34,7 +34,7 @@ group "ignition-base" {
 	]
 }
 
-group "ignition-iiot" {
+group "iiot" {
 	targets = [
 		"iiot-8-1-25",
 		"iiot-8-1-26",
@@ -45,7 +45,7 @@ group "ignition-iiot" {
 	]
 }
 
-group "ignition-mes" {
+group "mes" {
 	targets = [
 		"mes-8-1-25",
 		"mes-8-1-26",

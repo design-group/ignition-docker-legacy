@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Build Target'     
+        required: true
+        default: 'all'
+      push:
+        description: 'Push to Docker Hub'
+        required: true
+        default: false  
+
+jobs:
+  build-images:
+    name: "Build Images"
+    uses: ./.github/workflows/multi-arch-build.yml
+    with:
+      PUSH: ${{ github.event.inputs.push }}
+      TARGET: ${{ github.event.inputs.target }}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}

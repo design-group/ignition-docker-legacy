@@ -22,6 +22,6 @@ RUN mkdir -p /modules/pre-loaded-modules && \
 	echo "${MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/MQTT-Transmission.modl" | sha256sum -c - && \
 	chown -R ${IGNITION_UID}:${IGNITION_GID} /modules
 
-COPY secondary-versions/iiot/iiot-entrypoint-shim.sh /usr/local/bin/
+COPY --chmod=0755 secondary-versions/iiot/iiot-entrypoint-shim.sh /usr/local/bin/
 
 ENTRYPOINT [ "iiot-entrypoint-shim.sh" ]

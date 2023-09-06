@@ -1,6 +1,6 @@
 # post-8-1-25-docker-bake.hcl
 
-group "build" {
+group "all" {
 	targets = [
 		"8-1-25",
 		"8-1-26",

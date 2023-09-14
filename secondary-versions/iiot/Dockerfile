@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.31"
+ARG IGNITION_VERSION="8.1.32"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
 USER root

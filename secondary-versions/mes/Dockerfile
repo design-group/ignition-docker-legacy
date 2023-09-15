@@ -24,22 +24,22 @@ ARG TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256="D7237C25ADA1262931DD3ABEFC4CBF784353
 
 # Download the SepaSoft modules and store them in the /modules/pre-loaded-modules folder
 RUN mkdir -p /modules/pre-loaded-modules && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/WebService.modl" "${WEB_SERVICES_MODULE_DOWNLOAD_URL}" && \
-	echo "${WEB_SERVICES_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/WebService.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Production.modl" "${PRODUCTION_MODULE_DOWNLOAD_URL}" && \
-	echo "${PRODUCTION_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Production.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Settings_and_Changeover.modl" "${SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_URL}" && \
-	echo "${SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Settings_and_Changeover.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Batch.modl" "${BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_URL}" && \
-	echo "${BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Batch.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/SPC.modl" "${SPC_MODULE_DOWNLOAD_URL}" && \
-	echo "${SPC_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/SPC.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Document_Management.modl" "${DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_URL}" && \
-	echo "${DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Document_Management.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/OEE_Downtime.modl" "${OEE_DOWNTIME_MODULE_DOWNLOAD_URL}" && \
-	echo "${OEE_DOWNTIME_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/OEE_Downtime.modl" | sha256sum -c - && \
-	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Trace.modl" "${TRACK_AND_TRACE_MODULE_DOWNLOAD_URL}" && \
-	echo "${TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Trace.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Web+Service-module.modl" "${WEB_SERVICES_MODULE_DOWNLOAD_URL}" && \
+	echo "${WEB_SERVICES_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Web+Service-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Production-module.modl" "${PRODUCTION_MODULE_DOWNLOAD_URL}" && \
+	echo "${PRODUCTION_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Production-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Settings_and_Changeover-module.modl" "${SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_URL}" && \
+	echo "${SETTINGS_AND_CHANGEOVER_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Settings_and_Changeover-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Batch-module.modl" "${BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_URL}" && \
+	echo "${BATCH_AND_PROCEDURE_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Batch-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/SPC-module.modl" "${SPC_MODULE_DOWNLOAD_URL}" && \
+	echo "${SPC_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/SPC-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Document_Management-module.modl" "${DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_URL}" && \
+	echo "${DOCUMENT_MANAGEMENT_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Document_Management-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/OEE_Downtime-module.modl" "${OEE_DOWNTIME_MODULE_DOWNLOAD_URL}" && \
+	echo "${OEE_DOWNTIME_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/OEE_Downtime-module.modl" | sha256sum -c - && \
+	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://s3.amazonaws.com/* -O "/modules/pre-loaded-modules/Trace-module.modl" "${TRACK_AND_TRACE_MODULE_DOWNLOAD_URL}" && \
+	echo "${TRACK_AND_TRACE_MODULE_DOWNLOAD_SHA256}" "/modules/pre-loaded-modules/Trace-module.modl" | sha256sum -c - && \
 	chown -R ${IGNITION_UID}:${IGNITION_GID} /modules
 
 COPY --chmod=0755 secondary-versions/mes/mes-entrypoint-shim.sh /usr/local/bin/

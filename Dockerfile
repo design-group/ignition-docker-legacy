@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.32"
+ARG IGNITION_VERSION="8.1.36"
 FROM inductiveautomation/ignition:${IGNITION_VERSION:-latest}
 
 USER root

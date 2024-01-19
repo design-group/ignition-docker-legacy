@@ -8,7 +8,7 @@
 
 The purpose of this image is to provide a quick way to spin up docker containers that include some necessary creature comforts for version control, theme management, and easy interaction with the required file system components for an Ignition gateway.
 
-This image is automatically built for versions 8.1.13-8.1.31, new versions will be updated, but any features are subject to change with later versions. Upon a new pull request, if a valid build file is modified, it will trigger a build test pipeline that verifies the image still operates as expected.
+This image is automatically built for versions 8.1.13-8.1.36, new versions will be updated, but any features are subject to change with later versions. Upon a new pull request, if a valid build file is modified, it will trigger a build test pipeline that verifies the image still operates as expected.
 
 If using a Windows device, you will want to [Set up WSL](docs/setting-up-wsl.md)
 
@@ -18,7 +18,7 @@ ___
 
 If you're looking at this repository from GitHub, note that the docker image is actually `bwdesigngroup/ignition-docker`, not `design-group/ignition-docker`.
 
-When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) will automatically pull the most recent version of Ignition configured in the image. For example `:latest` may pull version `8.1.31` as of the time of writing.
+When pulling the docker image, note that using the copy link from the home page (`docker pull bwdesigngroup/ignition-docker`) will automatically pull the most recent version of Ignition configured in the image. For example `:latest` may pull version `8.1.36` as of the time of writing.
 
 ## File Access
 
@@ -83,7 +83,7 @@ This image is a derivative of the `inductiveautomation/ignition` image, and incl
 	- `MQTT Engine`
 	- `MQTT Distributor`
 
-It takes the `IIOT_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable all three modules, set the environment variable `IIOT_MODULES_ENABLED=mqtt-transmission,mqtt-engine,mqtt-distributor` to the `docker-compose.yml` file. This image only supports version 8.1.21, if a different version is needed, please open an issue.
+It takes the `IIOT_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable all three modules, set the environment variable `IIOT_MODULES_ENABLED=mqtt-transmission,mqtt-engine,mqtt-distributor` to the `docker-compose.yml` file. This image only supports version 8.1.36, if a different version is needed, please open an issue.
 
 #### ignition-docker-mes
 
@@ -98,7 +98,7 @@ This image is a derivative of the `inductiveautomation/ignition` image, and incl
 - `OEE Downtime`
 - `Track and Trace`
 
-It takes the `MES_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable the Settings and Changeover and Batch Procedure modules, set the environment variable `MES_MODULES_ENABLED=production,batch` to the `docker-compose.yml` file. This image only supports version 8.1.20, if a different version is needed, please open an issue.
+It takes the `MES_MODULES_ENABLED` environment variable that is a comma separated list of modules to enable. For example, to enable the Settings and Changeover and Batch Procedure modules, set the environment variable `MES_MODULES_ENABLED=production,batch` to the `docker-compose.yml` file. This image only supports version 8.1.35, if a different version is needed, please open an issue.
 
 ### Third Party Modules
 

@@ -1,4 +1,4 @@
-# post-8-1-25-docker-bake.hcl
+# post-8-1-24-docker-bake.hcl
 
 group "all" {
 	targets = [
@@ -8,18 +8,29 @@ group "all" {
 		"8-1-28",
 		"8-1-30",
 		"8-1-31",
+		"8-1-32",
+		"8-1-33",
+		"8-1-35",
+		"8-1-36",
 		"iiot-8-1-25",
 		"iiot-8-1-26",
 		"iiot-8-1-27",
 		"iiot-8-1-28",
 		"iiot-8-1-30",
 		"iiot-8-1-31",
+		"iiot-8-1-32",
+		"iiot-8-1-33",
+		"iiot-8-1-35",
+		"iiot-8-1-36",
 		"mes-8-1-25",
 		"mes-8-1-26",
 		"mes-8-1-27",
 		"mes-8-1-28",
 		"mes-8-1-30",
-		"mes-8-1-31"
+		"mes-8-1-31",
+		"mes-8-1-32",
+		"mes-8-1-33",
+		"mes-8-1-35"
 	]
 }
 
@@ -30,7 +41,11 @@ group "base" {
 		"8-1-27",
 		"8-1-28",
 		"8-1-30",
-		"8-1-31"
+		"8-1-31",
+		"8-1-32",
+		"8-1-33",
+		"8-1-35",
+		"8-1-36"
 	]
 }
 
@@ -41,7 +56,11 @@ group "iiot" {
 		"iiot-8-1-27",
 		"iiot-8-1-28",
 		"iiot-8-1-30",
-		"iiot-8-1-31"
+		"iiot-8-1-31",
+		"iiot-8-1-32",
+		"iiot-8-1-33",
+		"iiot-8-1-35",
+		"iiot-8-1-36"
 	]
 }
 
@@ -52,7 +71,10 @@ group "mes" {
 		"mes-8-1-27",
 		"mes-8-1-28",
 		"mes-8-1-30",
-		"mes-8-1-31"
+		"mes-8-1-31",
+		"mes-8-1-32",
+		"mes-8-1-33",
+		"mes-8-1-35"
 	]
 }
 
@@ -65,7 +87,7 @@ variable "BASE_VERSION" {
 }
 
 variable "PATCH_VERSION" {
-    default = 31
+    default = 36
 }
 
 // ###########################################################################################
@@ -149,7 +171,51 @@ target "8-1-31" {
 		IGNITION_VERSION = "8.1.31"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.31",
+		"${BASE_IMAGE_NAME}:8.1.31"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 32
+target "8-1-32" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.32"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.32"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 33
+target "8-1-33" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.33"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.33"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 35
+target "8-1-35" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.35"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.35"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 36
+target "8-1-36" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.36"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.36",
 		"${BASE_IMAGE_NAME}:latest"
 	]
 }
@@ -236,7 +302,51 @@ target "iiot-8-1-31" {
 		IGNITION_VERSION = "8.1.31"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-iiot:8.1.31",
+		"${BASE_IMAGE_NAME}-iiot:8.1.31"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 32
+target "iiot-8-1-32" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.32"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.32"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 33
+target "iiot-8-1-33" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.33"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.33"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 35
+target "iiot-8-1-35" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.35"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.35"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 36
+target "iiot-8-1-36" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.36"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.36",
 		"${BASE_IMAGE_NAME}-iiot:latest"
 	]
 }
@@ -323,7 +433,40 @@ target "mes-8-1-31" {
 		IGNITION_VERSION = "8.1.31"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-mes:8.1.31",
+		"${BASE_IMAGE_NAME}-mes:8.1.31"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 32
+target "mes-8-1-32" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.32"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.32"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 33
+target "mes-8-1-33" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.33"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.33"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 35
+target "mes-8-1-35" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.35"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.35",
 		"${BASE_IMAGE_NAME}-mes:latest"
 	]
 }

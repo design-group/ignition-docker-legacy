@@ -18,14 +18,14 @@ main() {
 enable_mes_modules() {
 
 	declare -A module_definition_mappings=(
-        ["webservice"]="WebService.modl"
-		["production"]="Production.modl"
-		["settings-and-changeover"]="Settings_and_Changeover.modl"
-		["batch"]="Batch.modl"
-		["spc"]="SPC.modl"
-		["document-management"]="Document_Management.modl"
-		["oee-downtime"]="OEE_Downtime.modl"
-		["track-and-trace"]="Trace.modl"
+        ["webservice"]="Web+Service-module.modl"
+		["production"]="Production-module.modl"
+		["settings-and-changeover"]="Settings_and_Changeover-module.modl"
+		["batch"]="Batch-module.modl"
+		["spc"]="SPC-module.modl"
+		["document-management"]="Document_Management-module.modl"
+		["oee-downtime"]="OEE_Downtime-module.modl"
+		["track-and-trace"]="Trace-module.modl"
 	)
 
 	for module in ${MES_MODULES_ENABLED//,/ }; do

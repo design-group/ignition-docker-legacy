@@ -150,21 +150,20 @@ symlink_themes() {
 #   $1 - Comma separated list of folders to symlink
 ################################################################################
 setup_additional_folder_symlinks() {
-    
     # ADDITIONAL_FOLDERS will be a comma delimited string of file paths to create symlinks for
     local ADDITIONAL_FOLDERS="${1}"
 
     # Split the ADDITIONAL_FOLDERS string into an array
-    local ADDITIONAL_FOLDERS_ARRAY=("${ADDITIONAL_FOLDERS//,/ }")
+    IFS=',' read -ra ADDITIONAL_FOLDERS_ARRAY <<< "${ADDITIONAL_FOLDERS}"
 
     # Loop through the array and create symlinks for each folder
     for ADDITIONAL_FOLDER in "${ADDITIONAL_FOLDERS_ARRAY[@]}"; do
-        # If the symlink and folder dont exist, create them
+        # If the symlink and folder don't exist, create them
         if [ ! -L "${IGNITION_INSTALL_LOCATION}"/data/"${ADDITIONAL_FOLDER}" ]; then
             echo "Creating symlink for ${ADDITIONAL_FOLDER}"
             ln -s "${WORKING_DIRECTORY}"/"${ADDITIONAL_FOLDER}" "${IGNITION_INSTALL_LOCATION}"/data/
 
-             echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
+            echo "Creating workdir folder for ${ADDITIONAL_FOLDER}"
             mkdir -p "${WORKING_DIRECTORY}"/"${ADDITIONAL_FOLDER}"
         fi
     done

@@ -1,4 +1,4 @@
-ARG IGNITION_VERSION="8.1.36"
+ARG IGNITION_VERSION="8.1.42"
 FROM bwdesigngroup/ignition-docker:${IGNITION_VERSION:-latest}
 
 USER root
@@ -6,12 +6,12 @@ USER root
 # Install some prerequisite packages
 RUN apt-get update && apt-get install -y wget
 
-ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.20/MQTT-Distributor-signed.modl"
-ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_SHA256="ad97fbb810a62688fc128aee482a414de94aea98817a19110aa5172404b5fbb3"
-ARG MQTT_ENGINE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.20/MQTT-Engine-signed.modl"
-ARG MQTT_ENGINE_MODULE_DOWNLOAD_SHA256="e3b5956ad2d7746462dc1997e672d8d3d2789d0852f52aad7849170f7a85d5df"
-ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.20/MQTT-Transmission-signed.modl"
-ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256="7023c677496f93e51b1cfc9e8c93d7fa77181cf82c0dcd6aa31f2c9732200e01"
+ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.22/MQTT-Distributor-signed.modl"
+ARG MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_SHA256="4485d06f1a44745de80dd9facb63d2286784f643192ca25b19a3a77eb61e71e8"
+ARG MQTT_ENGINE_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.22/MQTT-Engine-signed.modl"
+ARG MQTT_ENGINE_MODULE_DOWNLOAD_SHA256="affc55e4e3b011eb44cdf63f864307f03b6fb28a7c8c53e886394d517caa21e5"
+ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_URL="https://files.inductiveautomation.com/third-party/cirrus-link/4.0.22/MQTT-Transmission-signed.modl"
+ARG MQTT_TRANSMISSION_MODULE_DOWNLOAD_SHA256="0c223f44e687ca03a2eb64854895bca93f4535f8bdc709995d309c8df53f1aa3"
 
 RUN mkdir -p /modules/pre-loaded-modules && \
 	wget -q --ca-certificate=/etc/ssl/certs/ca-certificates.crt --referer https://inductiveautomation.com/* -O "/modules/pre-loaded-modules/MQTT-Distributor.modl" "${MQTT_DISTRIBUTOR_MODULE_DOWNLOAD_URL}" && \

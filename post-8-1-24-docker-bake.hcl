@@ -30,7 +30,13 @@ group "all" {
 		"mes-8-1-31",
 		"mes-8-1-32",
 		"mes-8-1-33",
-		"mes-8-1-35"
+		"mes-8-1-35",
+		"mes-8-1-36",
+		"mes-8-1-37",
+		"mes-8-1-38",
+		"mes-8-1-39",
+		"mes-8-1-41",
+		"mes-8-1-42",
 	]
 }
 
@@ -45,7 +51,12 @@ group "base" {
 		"8-1-32",
 		"8-1-33",
 		"8-1-35",
-		"8-1-36"
+		"8-1-36",
+		"8-1-37",
+		"8-1-38",
+		"8-1-39",
+		"8-1-41",
+		"8-1-42",
 	]
 }
 
@@ -60,7 +71,12 @@ group "iiot" {
 		"iiot-8-1-32",
 		"iiot-8-1-33",
 		"iiot-8-1-35",
-		"iiot-8-1-36"
+		"iiot-8-1-36",
+		"iiot-8-1-37",
+		"iiot-8-1-38",
+		"iiot-8-1-39",
+		"iiot-8-1-41",
+		"iiot-8-1-42",
 	]
 }
 
@@ -74,7 +90,12 @@ group "mes" {
 		"mes-8-1-31",
 		"mes-8-1-32",
 		"mes-8-1-33",
-		"mes-8-1-35"
+		"mes-8-1-35",
+		"mes-8-1-36",
+		"mes-8-1-37",
+		"mes-8-1-38",
+		"mes-8-1-39",
+		"mes-8-1-41",
 	]
 }
 
@@ -87,7 +108,7 @@ variable "BASE_VERSION" {
 }
 
 variable "PATCH_VERSION" {
-    default = 36
+    default = 42
 }
 
 // ###########################################################################################
@@ -215,7 +236,62 @@ target "8-1-36" {
 		IGNITION_VERSION = "8.1.36"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}:8.1.36",
+		"${BASE_IMAGE_NAME}:8.1.36"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 37
+target "8-1-37" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.37"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.37"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 38
+target "8-1-38" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.38"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.38"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 39
+target "8-1-39" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.39"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.39"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 41
+target "8-1-41" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.41"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.41"
+	]
+}
+
+// This target inherits the 8-1-base and sets the patch to 42
+target "8-1-42" {
+	inherits = ["8-1-base"]
+	args = {
+		IGNITION_VERSION = "8.1.42"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}:8.1.42",
 		"${BASE_IMAGE_NAME}:latest"
 	]
 }
@@ -346,7 +422,62 @@ target "iiot-8-1-36" {
 		IGNITION_VERSION = "8.1.36"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-iiot:8.1.36",
+		"${BASE_IMAGE_NAME}-iiot:8.1.36"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 37
+target "iiot-8-1-37" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.37"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.37"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 38
+target "iiot-8-1-38" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.38"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.38"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 39
+target "iiot-8-1-39" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.39"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.39"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 41
+target "iiot-8-1-41" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.41"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.41"
+	]
+}
+
+// This target inherits the iiot-base and sets the patch to 42
+target "iiot-8-1-42" {
+	inherits = ["iiot-base"]
+	args = {
+		IGNITION_VERSION = "8.1.42"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-iiot:8.1.42",
 		"${BASE_IMAGE_NAME}-iiot:latest"
 	]
 }
@@ -466,7 +597,62 @@ target "mes-8-1-35" {
 		IGNITION_VERSION = "8.1.35"
 	}
 	tags = [
-		"${BASE_IMAGE_NAME}-mes:8.1.35",
+		"${BASE_IMAGE_NAME}-mes:8.1.35"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 36
+target "mes-8-1-36" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.36"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.36"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 37
+target "mes-8-1-37" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.37"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.37"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 38
+target "mes-8-1-38" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.38"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.38"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 39
+target "mes-8-1-39" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.39"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.39"
+	]
+}
+
+// This target inherits the mes-base and sets the patch to 41
+target "mes-8-1-41" {
+	inherits = ["mes-base"]
+	args = {
+		IGNITION_VERSION = "8.1.41"
+	}
+	tags = [
+		"${BASE_IMAGE_NAME}-mes:8.1.41",
 		"${BASE_IMAGE_NAME}-mes:latest"
 	]
 }

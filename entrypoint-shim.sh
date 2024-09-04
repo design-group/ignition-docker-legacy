@@ -66,7 +66,7 @@ main() {
 	# If "--" is already in the args, insert any jvm args before it, else if it isnt there just append the jvm args
 	if [[ " ${args[*]} " =~ " -- " ]]; then
 		# Insert the jvm args before the "--" in the args array
-		args=( "${args[@]/--/${jvm_args[*]} --}" )
+		args=("${args[@]/#-- /-- ${jvm_args[*]} }")
 	else
 		# Append the jvm args to the args array
 		args+=( "${jvm_args[@]}" )
